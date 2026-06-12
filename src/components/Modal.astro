@@ -48,7 +48,7 @@ const hasFooter = Astro.slots.has("footer");
     position: relative;
     margin: auto auto 0;
     width: 100%;
-    max-width: var(--mobile-width);
+    max-width: 100%;
     max-height: 92dvh;
     background: var(--color-canvas);
     border-radius: 24px 24px 0 0;
@@ -58,6 +58,8 @@ const hasFooter = Astro.slots.has("footer");
   }
   [data-variant="dialog"] .surface {
     margin: auto;
+    width: calc(100% - 2 * var(--space-md));
+    max-width: 420px;
     border-radius: 24px;
     max-height: 86dvh;
     animation: pop 0.2s ease;

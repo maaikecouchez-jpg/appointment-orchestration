@@ -36,15 +36,12 @@ function setText(sel: string, value: string) {
 }
 
 export function initOverview() {
-  const state = loadBooking();
-
-  function persist() {
-    sessionStorage.setItem("booking", JSON.stringify(state));
-  }
+  const stored = loadBooking(); // the committed appointment
+  const draft = { ...stored }; // working copy edited inside the manage overlay
 
   function updateAppointmentCard() {
-    setText("[data-overview-date]", state.date ? confirmDate(state.date) : "—");
-    setText("[data-overview-moment]", momentLabel(state.moment));
+    setText("[data-overview-date]", stored.date ? confirmDate(stored.date) : "—");
+    setText("[data-overview-moment]", momentLabel(stored.moment));
   }
   updateAppointmentCard();
 
@@ -54,35 +51,43 @@ export function initOverview() {
     flashToast("Afspraak bevestigd");
   }
 
-  // Shared confirm editor drives the manage overlay's cards + edit sheets
+  // The editor mutates the DRAFT only — nothing is committed until "Opslaan".
   const editor = initConfirmEditor({
-    state,
-    persist,
-    onChange: updateAppointmentCard,
+    state: draft,
+    persist: () => {},
   });
 
   // ── Manage overlay open/close ─────────────────────────────────────
   const overlay = document.querySelector<HTMLElement>("[data-manage-overlay]");
-  function openManage() {
-    if (!overlay) return;
-    editor.refresh();
-    overlay.hidden = false;
-    document.body.style.overflow = "hidden";
-  }
-  function closeManage() {
+  function hideOverlay() {
     if (!overlay) return;
     overlay.hidden = true;
     document.body.style.overflow = "";
   }
+  function openManage() {
+    if (!overlay) return;
+    Object.assign(draft, stored); // start from the committed values
+    editor.refresh();
+    overlay.hidden = false;
+    document.body.style.overflow = "hidden";
+  }
+  function cancelManage() {
+    Object.assign(draft, stored); // discard any edits
+    editor.refresh();
+    hideOverlay();
+  }
 
   document.querySelector<HTMLButtonElement>("[data-open-manage]")?.addEventListener("click", openManage);
+  // Close icon + "Annuleren" → discard changes
   document.querySelectorAll<HTMLElement>("[data-manage-close]").forEach((el) =>
-    el.addEventListener("click", closeManage)
+    el.addEventListener("click", cancelManage)
   );
+  // "Opslaan" → commit the draft to the stored appointment
   document.querySelector<HTMLButtonElement>("[data-manage-save]")?.addEventListener("click", () => {
-    persist();
+    Object.assign(stored, draft);
+    sessionStorage.setItem("booking", JSON.stringify(stored));
     updateAppointmentCard();
-    closeManage();
+    hideOverlay();
     flashToast("Afspraak gewijzigd");
   });
 
