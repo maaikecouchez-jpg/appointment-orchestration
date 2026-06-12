@@ -12,11 +12,13 @@ export interface MomentsApi {
 
 export function initMoments(
   root: HTMLElement,
-  onSelect: (id: MomentId) => void
+  onSelect: (id: MomentId) => void,
 ): MomentsApi {
   const help = root.querySelector<HTMLElement>("[data-moments-help]")!;
   const duration = root.querySelector<HTMLElement>("[data-duration]")!;
-  const buttons = Array.from(root.querySelectorAll<HTMLButtonElement>("[data-moment]"));
+  const buttons = Array.from(
+    root.querySelectorAll<HTMLButtonElement>("[data-moment]"),
+  );
   let selected: MomentId | null = null;
 
   function applySelection() {
@@ -35,7 +37,7 @@ export function initMoments(
     root.hidden = false;
     duration.hidden = false;
     duration.textContent = "De installatie duurt maximaal 2u.";
-    help.innerHTML = `Selecteer een tijdslot voor <b>${longDate(iso)}</b>`;
+    help.innerHTML = `Selecteer een tijdslot voor<br /><b>${longDate(iso)}</b>`;
 
     buttons.forEach((b) => {
       const id = b.dataset.moment as MomentId;
@@ -47,7 +49,7 @@ export function initMoments(
     // drop a selection that is no longer valid for this date
     if (selected) {
       const stillOk = buttons.find(
-        (b) => b.dataset.moment === selected && b.dataset.available === "true"
+        (b) => b.dataset.moment === selected && b.dataset.available === "true",
       );
       if (!stillOk) selected = null;
     }

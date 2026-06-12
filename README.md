@@ -20,11 +20,21 @@ Pushed to GitHub and served via **GitHub Pages** at
 `https://citizen-k-code.github.io/appointment-orchestration/`. The workflow in
 `.github/workflows/deploy.yml` rebuilds and redeploys on **every push to `main`**.
 
-- `/` — **Mijn afspraken** landing. Shows a "Maak je afspraak" CTA when nothing is
-  booked, or a "Lopende afspraken" card once an appointment exists. "Maak je afspraak"
-  opens the booking wizard (intro → datepicker → extra info → confirm) in a **fullscreen
-  overlay**; confirming closes it and flips the page to the booked state.
-- `/overzicht` — the booked-appointment detail page (reached by tapping the booked card).
+### Versions (A/B test)
+
+- `/` — **"Afspraak maken"** selector with two links: **versie 01** and **versie 02**.
+- `/v1/` + `/v1/overzicht` — **version 01**: booking flow with the horizontal date strip.
+- `/v2/` + `/v2/overzicht` — **version 02**: identical flow, but the date step uses a
+  **month calendar** (greyed unavailable days, green dot = available, yellow stroke =
+  selected, month arrows that only step through months containing availability).
+
+Both versions share all code except the date picker (`BookingFlow` / `BookingDetail`
+components take a `version` prop; `DatePickerSlot` renders `DatePicker` vs `CalendarPicker`;
+`initPicker()` switches the matching island). Each version keeps **separate booking state**
+(sessionStorage keys are namespaced per version via `src/scripts/version.ts`).
+
+Inside a version: **"Maak je afspraak"** opens the wizard (intro → date → extra → confirm)
+in a fullscreen overlay; confirming redirects to that version's `…/overzicht`.
 
 On the confirm step, the three cards (datetime, contact, extra info) are fully clickable
 and each opens a bottom sheet to edit that input. Selecting a date auto-scrolls the time

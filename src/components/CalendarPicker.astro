@@ -1,0 +1,179 @@
+---
+// Traditional month-calendar date picker (version 02).
+// Months are rendered server-side (only those containing available days);
+// calendar.ts handles month navigation + selection.
+import { visibleDays } from "../lib/availability";
+
+const MONTHS_NL = [
+  "januari", "februari", "maart", "april", "mei", "juni",
+  "juli", "augustus", "september", "oktober", "november", "december",
+];
+const WEEKDAYS = ["MA", "DI", "WO", "DO", "VR", "ZA", "ZO"];
+
+function parseISO(iso: string): Date {
+  const [y, m, d] = iso.split("-").map(Number);
+  return new Date(y, m - 1, d);
+}
+
+// ISO dates that are bookable (available + within the bookable window)
+const availableSet = new Set(visibleDays.filter((d) => d.available).map((d) => d.date));
+
+// Distinct months (only those with at least one available day), in order
+const monthKeys: string[] = [];
+for (const d of visibleDays) {
+  if (!d.available) continue;
+  const dt = parseISO(d.date);
+  const key = `${dt.getFullYear()}-${dt.getMonth()}`;
+  if (!monthKeys.includes(key)) monthKeys.push(key);
+}
+
+const months = monthKeys.map((key) => {
+  const [year, month] = key.split("-").map(Number);
+  const offset = (new Date(year, month, 1).getDay() + 6) % 7; // Monday-first
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  const days = [];
+  for (let day = 1; day <= daysInMonth; day++) {
+    const iso = `${year}-${String(month + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+    days.push({ iso, day, available: availableSet.has(iso) });
+  }
+  return { label: `${MONTHS_NL[month]} ${year}`, blanks: offset, days };
+});
+---
+
+<div class="calendar" data-datepicker data-picker="calendar">
+  <div class="cal-header">
+    <button type="button" class="cal-nav" data-cal-prev aria-label="Vorige maand" disabled>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <span class="cal-label" data-cal-label></span>
+    <button type="button" class="cal-nav" data-cal-next aria-label="Volgende maand">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+  </div>
+
+  <div class="cal-weekdays">
+    {WEEKDAYS.map((w) => <span>{w}</span>)}
+  </div>
+
+  <div class="cal-months">
+    {
+      months.map((m, i) => (
+        <div class="cal-month" data-month data-index={i} data-label={m.label} hidden={i !== 0}>
+          {Array.from({ length: m.blanks }).map(() => <span class="cal-blank" />)}
+          {m.days.map((d) => (
+            <button
+              type="button"
+              class="cal-cell"
+              data-cell
+              data-date={d.iso}
+              data-available={d.available ? "true" : "false"}
+              data-selected="false"
+              disabled={!d.available}
+              aria-disabled={!d.available}
+            >
+              <span class="cal-num">{d.day}</span>
+              <span class="cal-dot" aria-hidden="true" />
+            </button>
+          ))}
+        </div>
+      ))
+    }
+  </div>
+</div>
+
+<style>
+  .calendar {
+    margin-top: var(--space-md);
+  }
+  .cal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-sm);
+  }
+  .cal-label {
+    flex: 1;
+    text-align: center;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: var(--type-body-size);
+    text-transform: capitalize;
+  }
+  .cal-nav {
+    width: 36px;
+    height: 36px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    color: var(--color-ink);
+    border-radius: var(--radius-pill);
+  }
+  .cal-nav[disabled] {
+    color: var(--color-ink-subtlest);
+    cursor: default;
+  }
+  .cal-nav:not([disabled]):hover {
+    background: var(--color-canvas-neutral);
+  }
+
+  .cal-weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+    margin-bottom: var(--space-xs);
+  }
+  .cal-weekdays span {
+    text-align: center;
+    color: var(--color-ink-subtle);
+    font-size: var(--type-caption-size);
+    padding: 4px 0;
+  }
+
+  .cal-month {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+  }
+  .cal-blank {
+    aspect-ratio: 1;
+  }
+  .cal-cell {
+    aspect-ratio: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    background: none;
+    border: 2px solid transparent;
+    border-radius: 10px;
+    color: var(--color-ink);
+  }
+  .cal-num {
+    font-size: var(--type-body-size);
+    font-weight: 600;
+    line-height: 1;
+  }
+  .cal-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #00875a;
+  }
+
+  /* Unavailable days: greyed, no dot, not selectable */
+  .cal-cell[data-available="false"] {
+    color: var(--color-ink-subtlest);
+    cursor: default;
+  }
+  .cal-cell[data-available="false"] .cal-dot {
+    visibility: hidden;
+  }
+
+  /* Selected day: yellow stroke (keeps its dot) */
+  .cal-cell[data-selected="true"] {
+    border-color: var(--color-action);
+  }
+</style>

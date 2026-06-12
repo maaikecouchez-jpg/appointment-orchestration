@@ -4,7 +4,7 @@
 import { confirmDate, firstAvailable } from "../lib/availability";
 import { initConfirmEditor } from "./confirm-editor";
 import { MOMENTS, config } from "../data/variables";
-import { withBase } from "../lib/base";
+import { vKey, vHome } from "./version";
 import type { BookingState, MomentId } from "../lib/types";
 
 function loadBooking(): BookingState {
@@ -18,7 +18,7 @@ function loadBooking(): BookingState {
     contactPhone: config.customer.phone,
   };
   try {
-    const raw = sessionStorage.getItem("booking");
+    const raw = sessionStorage.getItem(vKey("booking"));
     if (raw) Object.assign(base, JSON.parse(raw));
   } catch {
     /* ignore */
@@ -46,8 +46,8 @@ export function initOverview() {
   updateAppointmentCard();
 
   // Just booked → confirmation toast on arrival
-  if (sessionStorage.getItem("booking-confirmed") === "true") {
-    sessionStorage.removeItem("booking-confirmed");
+  if (sessionStorage.getItem(vKey("booking-confirmed")) === "true") {
+    sessionStorage.removeItem(vKey("booking-confirmed"));
     flashToast("Afspraak bevestigd");
   }
 
@@ -85,7 +85,7 @@ export function initOverview() {
   // "Opslaan" → commit the draft to the stored appointment
   document.querySelector<HTMLButtonElement>("[data-manage-save]")?.addEventListener("click", () => {
     Object.assign(stored, draft);
-    sessionStorage.setItem("booking", JSON.stringify(stored));
+    sessionStorage.setItem(vKey("booking"), JSON.stringify(stored));
     updateAppointmentCard();
     hideOverlay();
     flashToast("Afspraak gewijzigd");
@@ -99,9 +99,9 @@ export function initOverview() {
       else if (a === "share") flashToast("Deellink gekopieerd");
       else if (a === "delete") {
         if (confirm("Ben je zeker dat je deze afspraak wil verwijderen?")) {
-          sessionStorage.removeItem("booking");
-          sessionStorage.removeItem("appointment-booked");
-          window.location.href = withBase();
+          sessionStorage.removeItem(vKey("booking"));
+          sessionStorage.removeItem(vKey("appointment-booked"));
+          window.location.href = vHome();
         }
       }
     });

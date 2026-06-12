@@ -1,0 +1,12 @@
+---
+// Renders the date-strip picker (v1) or the month calendar (v2).
+import DatePicker from "./DatePicker.astro";
+import CalendarPicker from "./CalendarPicker.astro";
+
+interface Props {
+  version?: string;
+}
+const { version = "1" } = Astro.props;
+---
+
+{version === "2" ? <CalendarPicker /> : <DatePicker />}

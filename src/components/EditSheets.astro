@@ -2,13 +2,18 @@
 // Shared bottom sheets for editing the appointment fields. Used by both the
 // wizard confirm step and the manage overlay.
 import Modal from "./Modal.astro";
-import DatePicker from "./DatePicker.astro";
+import DatePickerSlot from "./DatePickerSlot.astro";
 import MomentList from "./MomentList.astro";
+
+interface Props {
+  version?: string;
+}
+const { version = "1" } = Astro.props;
 ---
 
 <Modal id="edit-datetime" title="Kies een datum" variant="sheet">
   <div data-edit-dt>
-    <DatePicker />
+    <DatePickerSlot version={version} />
     <MomentList />
   </div>
   <Fragment slot="footer">

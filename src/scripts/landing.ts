@@ -2,11 +2,12 @@
 // flips between empty and booked states, and shows the confirmation toast.
 import { weekday, numericDate, firstAvailable } from "../lib/availability";
 import { MOMENTS } from "../data/variables";
+import { vKey } from "./version";
 import type { BookingState, MomentId } from "../lib/types";
 
 function readBooking(): BookingState | null {
   try {
-    const raw = sessionStorage.getItem("booking");
+    const raw = sessionStorage.getItem(vKey("booking"));
     if (raw) return JSON.parse(raw);
   } catch {
     /* ignore */
@@ -79,7 +80,7 @@ export function initLanding() {
   });
 
   // On load: if an appointment is already booked, show that state.
-  if (sessionStorage.getItem("appointment-booked") === "true") {
+  if (sessionStorage.getItem(vKey("appointment-booked")) === "true") {
     renderBooked();
   }
 }

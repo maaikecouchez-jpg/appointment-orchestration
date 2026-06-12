@@ -1,21 +1,26 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
-import AppShell from "../components/AppShell.astro";
-import DashboardShell from "../components/DashboardShell.astro";
-import AddressInfo from "../components/AddressInfo.astro";
-import AppointmentCard from "../components/overview/AppointmentCard.astro";
-import ActionsList from "../components/overview/ActionsList.astro";
-import GoodToKnow from "../components/overview/GoodToKnow.astro";
-import Faq from "../components/overview/Faq.astro";
-import ConfirmContent from "../components/ConfirmContent.astro";
-import EditSheets from "../components/EditSheets.astro";
-import Toast from "../components/Toast.astro";
+import AppShell from "./AppShell.astro";
+import DashboardShell from "./DashboardShell.astro";
+import AddressInfo from "./AddressInfo.astro";
+import AppointmentCard from "./overview/AppointmentCard.astro";
+import ActionsList from "./overview/ActionsList.astro";
+import GoodToKnow from "./overview/GoodToKnow.astro";
+import Faq from "./overview/Faq.astro";
+import ConfirmContent from "./ConfirmContent.astro";
+import EditSheets from "./EditSheets.astro";
+import Toast from "./Toast.astro";
 import { config } from "../data/variables";
 import { withBase } from "../lib/base";
+
+interface Props {
+  version?: string;
+}
+const { version = "1" } = Astro.props;
+const homeHref = withBase(`v${version}/`);
 ---
 
-<BaseLayout title="Je afspraak — Telenet">
-  <DashboardShell backLabel="Mijn afspraken" backHref={withBase()} bottomNav={false}>
+<Fragment>
+  <DashboardShell backLabel="Mijn afspraken" backHref={homeHref} bottomNav={false}>
     <div data-overview class="ov-body">
       <span class="ov-eyebrow">Afspraak</span>
       <h1 class="t-title-lg">{config.appointment.overviewTitle}</h1>
@@ -59,10 +64,10 @@ import { withBase } from "../lib/base";
     </AppShell>
   </div>
 
-  <EditSheets />
+  <EditSheets version={version} />
 
   <Toast message="Afspraak bevestigd" />
-</BaseLayout>
+</Fragment>
 
 <style>
   .ov-body {

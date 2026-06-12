@@ -1,6 +1,7 @@
 // Shared editor for the "appointment summary" cards + their edit bottom sheets.
 // Used by the wizard's confirm step and the "Beheer je afspraak" overlay.
-import { initDatePicker, type DatePickerApi } from "./datepicker";
+import { initPicker } from "./picker";
+import { type DatePickerApi } from "./datepicker";
 import { initMoments, type MomentsApi } from "./moments";
 import { confirmDate } from "../lib/availability";
 import { MOMENTS } from "../data/variables";
@@ -62,7 +63,7 @@ export function initConfirmEditor(opts: ConfirmEditorOptions): ConfirmEditor {
 
   if (dtRoot && saveDt) {
     editMomentsEl = dtRoot.querySelector<HTMLElement>("[data-moments]")!;
-    editDp = initDatePicker(dtRoot.querySelector<HTMLElement>("[data-datepicker]")!, (iso) => {
+    editDp = initPicker(dtRoot.querySelector<HTMLElement>("[data-datepicker]")!, (iso) => {
       // New date → clear the spot selection and reveal the slots
       editMo!.select(null);
       editMo!.showForDate(iso);

@@ -1,500 +1,108 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import AppShell from "../components/AppShell.astro";
-import DashboardShell from "../components/DashboardShell.astro";
-import Header from "../components/Header.astro";
-import AddressInfo from "../components/AddressInfo.astro";
-import RadioCard from "../components/RadioCard.astro";
-import DatePicker from "../components/DatePicker.astro";
-import MomentList from "../components/MomentList.astro";
-import ConfirmContent from "../components/ConfirmContent.astro";
-import EditSheets from "../components/EditSheets.astro";
-import StepNav from "../components/StepNav.astro";
-import Modal from "../components/Modal.astro";
-import Toast from "../components/Toast.astro";
-import { config } from "../data/variables";
-import { firstAvailable, longDate } from "../lib/availability";
 import { withBase } from "../lib/base";
 
-const fa = firstAvailable();
-const faLabel = fa ? longDate(fa.day.date) : "Geen datum beschikbaar";
+const versions = [
+  { label: "Afspraak maken - versie 01", desc: "Datumkiezer met horizontale datumstrook", href: withBase("v1/") },
+  { label: "Afspraak maken - versie 02", desc: "Datumkiezer met maandkalender", href: withBase("v2/") },
+];
 ---
 
-<BaseLayout title="Mijn afspraken — Telenet">
-  <!-- ── Mijn afspraken landing ─────────────────────────────────────── -->
-  <DashboardShell backLabel="MyTelenet">
-    <div data-landing class="landing-body">
-      <h1 class="t-title-lg">{config.landing.title}</h1>
+<BaseLayout title="Afspraak maken — Telenet">
+  <main class="chooser">
+    <div class="chooser-inner">
+      <span class="logo" aria-label="Telenet">
+        <svg width="48" height="48" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+          <rect width="40" height="40" rx="10" fill="var(--color-ink)" />
+          <circle cx="14" cy="18" r="2.4" fill="#fff" />
+          <circle cx="26" cy="18" r="2.4" fill="#fff" />
+          <path d="M12.5 25c2.2 2.4 12.8 2.4 15 0" stroke="#fff" stroke-width="2.4" stroke-linecap="round" />
+        </svg>
+      </span>
+      <h1 class="t-display">Afspraak maken</h1>
+      <p class="t-body t-subtle sub">Kies een versie van de flow om te testen.</p>
 
-      <!-- Empty state -->
-        <div class="product-card" data-empty-state>
-          <div class="pc-top">
-            <span class="pc-icon" aria-hidden="true">
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><rect x="4" y="5" width="16" height="15" rx="3" stroke="currentColor" stroke-width="1.8"/><path d="M4 9h16M8 3v4M16 3v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
-              <span class="pc-badge" aria-hidden="true">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M12 5v10M7 11l5 5 5-5" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <nav class="links">
+        {
+          versions.map((v) => (
+            <a class="version-link" href={v.href}>
+              <span class="vl-body">
+                <strong>{v.label}</strong>
+                <span class="t-subtle vl-desc">{v.desc}</span>
               </span>
-            </span>
-            <div class="pc-text">
-              <strong>{config.landing.productTitle}</strong>
-              <span class="t-subtle">{config.landing.productSubtitle}</span>
-            </div>
-          </div>
-          <button type="button" class="pc-cta" data-start-wizard>{config.landing.ctaLabel}</button>
-        </div>
-
-        <!-- Booked state -->
-        <section data-booked-state hidden>
-          <h2 class="t-title-lg booked-head">{config.landing.bookedSectionTitle}</h2>
-          <a href={withBase("overzicht")} class="booked-card">
-            <span class="bc-icon" aria-hidden="true">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="4" y="5" width="16" height="15" rx="3" stroke="currentColor" stroke-width="1.8"/><path d="M4 9h16M8 3v4M16 3v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
-              <span class="bc-check" aria-hidden="true">
-                <svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </span>
-            </span>
-            <span class="bc-body">
-              <strong>{config.landing.bookedTitle}</strong>
-              <span class="t-subtle" data-landing-summary>—</span>
-            </span>
-            <svg class="bc-chev" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </a>
-        </section>
-
-        <section class="faq-links">
-          <h2 class="t-caption faq-head">{config.landing.faqTitle}</h2>
-          <div class="faq-card">
-            {
-              config.landing.faqLinks.map((q) => (
-                <a class="faq-row" href="#">
-                  <span>{q}</span>
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 5h5v5M19 5l-8 8M11 5H6a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2v-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                </a>
-              ))
-            }
-          </div>
-        </section>
+              <svg class="vl-chev" width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </a>
+          ))
+        }
+      </nav>
     </div>
-  </DashboardShell>
-
-  <!-- ── Wizard fullscreen overlay ──────────────────────────────────── -->
-  <div class="wizard-overlay" data-wizard-overlay hidden>
-    <AppShell>
-      <div class="wizard" data-wizard>
-        <Header />
-
-        <!-- Step 1a · Intro -->
-        <section class="panel" data-panel="intro">
-          <div class="pad">
-            <h1 class="t-display">{config.service.title}</h1>
-            <p class="t-body t-subtle intro-sub">{config.service.subtitle}</p>
-            <div class="intro-address"><AddressInfo /></div>
-            <div class="intro-cards">
-              <RadioCard value="first-available" badge="Eerst beschikbaar" title={faLabel} subtitle={config.firstAvailableWindowLabel} />
-              <RadioCard value="custom" title="Op een ander moment" subtitle="Kies zelf je dag en moment" />
-            </div>
-            <section class="whatwedo">
-              <h2 class="t-caption section-head">Wat gaan we doen</h2>
-              <ul class="bullets">
-                {
-                  config.service.whatWeDo.map((t, i) => (
-                    <li>
-                      <span class="dot" />
-                      <span>
-                        {t}
-                        {i === 0 && (
-                          <>
-                            {" "}
-                            <button type="button" class="inline-link" data-open-modal="info">Meer info</button>
-                          </>
-                        )}
-                      </span>
-                    </li>
-                  ))
-                }
-              </ul>
-            </section>
-          </div>
-        </section>
-
-        <!-- Step 1b · Datepicker -->
-        <section class="panel" data-panel="date" hidden>
-          <div class="pad">
-            <span class="step-eyebrow">Step 1/3</span>
-            <h1 class="t-display">Kies een datum voor je installatie</h1>
-            <DatePicker />
-            <MomentList />
-          </div>
-        </section>
-
-        <!-- Step 2 · Extra info -->
-        <section class="panel" data-panel="extra" hidden>
-          <div class="pad">
-            <span class="step-eyebrow">Step 2/3</span>
-            <h1 class="t-display">Geef ons extra informatie</h1>
-            <p class="t-body t-subtle intro-sub">
-              Waar we moeten aanbellen, of er een hond is, waar we kunnen parkeren,…
-              Als er iets is wat je denkt dat onze technieker best weet, kan je het hier achterlaten.
-            </p>
-            <div class="field">
-              <div class="field-head">
-                <label for="extra-info">Extra informatie</label>
-                <span class="optional">Optioneel</span>
-              </div>
-              <textarea id="extra-info" data-extra-input rows="6" placeholder="Typ hier je bericht…"></textarea>
-            </div>
-          </div>
-        </section>
-
-        <!-- Step 3 · Confirm -->
-        <section class="panel" data-panel="confirm" hidden>
-          <div class="pad pad--wide">
-            <div class="confirm-layout">
-              <div class="confirm-illustration" aria-hidden="true">
-                <img src={withBase("img/installation.svg")} alt="" width="403" height="236" />
-              </div>
-              <div class="confirm-main">
-                <span class="step-eyebrow">Step 3/3</span>
-                <h1 class="t-display">Bevestig je afspraak</h1>
-                <ConfirmContent />
-              </div>
-            </div>
-          </div>
-        </section>
-      </div>
-
-      <Fragment slot="footer">
-        <StepNav />
-      </Fragment>
-    </AppShell>
-  </div>
-
-  <!-- ── Edit bottom sheets (shared) ────────────────────────────────── -->
-  <EditSheets />
-
-  <!-- Info explainer -->
-  <Modal id="info" title={config.infoModal.title} variant="dialog">
-    <p class="t-body t-subtle">{config.infoModal.body}</p>
-  </Modal>
-
-  <Toast message="Afspraak bevestigd" />
+  </main>
 </BaseLayout>
 
 <style>
-  /* Landing */
-  .landing-body {
-    padding: var(--space-lg) 0 var(--space-2xl);
+  .chooser {
+    min-height: 100dvh;
+    background: var(--color-canvas);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-xl) var(--app-pad-x);
+  }
+  .chooser-inner {
+    width: 100%;
+    max-width: 480px;
+  }
+  .logo {
+    display: inline-flex;
+    margin-bottom: var(--space-lg);
+  }
+  h1.t-display {
+    margin-bottom: var(--space-2xs);
+  }
+  .sub {
+    margin-bottom: var(--space-xl);
+  }
+  .links {
     display: flex;
     flex-direction: column;
-    gap: var(--space-lg);
+    gap: var(--space-sm);
   }
-  .product-card,
-  .booked-card,
-  .faq-card {
+  .version-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-md);
+    padding: var(--space-lg) var(--space-md);
     background: var(--color-surface);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-card);
-  }
-  .product-card {
-    padding: var(--space-md);
-  }
-  .pc-top {
-    display: flex;
-    gap: var(--space-sm);
-    align-items: center;
-    margin-bottom: var(--space-md);
-  }
-  .pc-icon {
-    position: relative;
-    flex: none;
-    width: 48px;
-    height: 48px;
-    border-radius: var(--radius-card);
-    background: var(--color-canvas-neutral);
+    text-decoration: none;
     color: var(--color-ink);
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+    transition: transform 0.05s, box-shadow 0.15s;
   }
-  .pc-badge {
-    position: absolute;
-    right: -4px;
-    bottom: -4px;
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
-    background: #1d6bf3;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border: 2px solid var(--color-surface);
+  .version-link:hover {
+    box-shadow: var(--shadow-pop);
   }
-  .pc-text {
+  .version-link:active {
+    transform: scale(0.99);
+  }
+  .vl-body {
     display: flex;
     flex-direction: column;
     gap: 2px;
   }
-  .pc-cta {
-    width: 100%;
-    background: var(--color-ink);
-    color: #fff;
-    border: none;
-    border-radius: var(--radius-pill);
-    padding: 14px;
+  .vl-body strong {
     font-family: var(--font-display);
-    font-weight: 600;
-    font-size: var(--type-body-size);
+    font-size: var(--type-title-lg-size);
+    font-weight: 700;
   }
-
-  /* Desktop: product card becomes a horizontal row with inline button */
-  @media (min-width: 1024px) {
-    .product-card {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: var(--space-lg);
-      padding: var(--space-md) var(--space-lg);
-    }
-    .pc-top {
-      margin-bottom: 0;
-    }
-    .pc-cta {
-      width: auto;
-      flex: none;
-      padding: 12px 24px;
-    }
-  }
-
-  .booked-head {
-    margin-bottom: var(--space-sm);
-  }
-  .booked-card {
-    display: flex;
-    align-items: center;
-    gap: var(--space-sm);
-    padding: var(--space-md);
-    text-decoration: none;
-    color: var(--color-ink);
-  }
-  .bc-icon {
-    position: relative;
-    flex: none;
-    width: 44px;
-    height: 44px;
-    border-radius: var(--radius-card);
-    background: var(--color-canvas-neutral);
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .bc-check {
-    position: absolute;
-    right: -3px;
-    bottom: -3px;
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
-    background: #1db954;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border: 2px solid var(--color-surface);
-  }
-  .bc-body {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-    min-width: 0;
-  }
-  .bc-body .t-subtle {
+  .vl-desc {
     font-size: var(--type-body-sm-size);
   }
-  .bc-chev {
+  .vl-chev {
     flex: none;
     color: var(--color-ink-subtle);
-  }
-
-  .faq-head {
-    color: var(--color-ink-subtle);
-    font-weight: 600;
-    margin-bottom: var(--space-sm);
-  }
-  .faq-card {
-    padding: 0 var(--space-md);
-  }
-  .faq-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: var(--space-sm);
-    padding: var(--space-md) 0;
-    text-decoration: none;
-    color: var(--color-ink);
-    font-size: var(--type-body-size);
-  }
-  .faq-row + .faq-row {
-    border-top: 1px solid var(--color-border-subtle);
-  }
-  .faq-row svg {
-    color: var(--color-ink-subtle);
-    flex: none;
-  }
-
-  /* Wizard overlay */
-  .wizard-overlay {
-    position: fixed;
-    inset: 0;
-    z-index: 60;
-  }
-  .wizard {
-    display: flex;
-    flex-direction: column;
-    min-height: 100%;
-  }
-  .panel {
-    flex: 1;
-  }
-  .pad {
-    padding: var(--space-xs) var(--app-pad-x) var(--space-xl);
-  }
-  h1.t-display {
-    margin-bottom: var(--space-xs);
-  }
-  .confirm-illustration {
-    display: none;
-  }
-
-  /* Desktop wizard: centered content column + 2-column confirm */
-  @media (min-width: 1024px) {
-    .pad {
-      max-width: var(--content-wizard);
-      margin: 0 auto;
-      padding: var(--space-2xl) var(--space-lg) var(--space-2xl);
-    }
-    .pad--wide {
-      max-width: var(--content-confirm);
-    }
-    .confirm-layout {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: var(--space-2xl);
-      align-items: center;
-    }
-    .confirm-illustration {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .confirm-illustration img {
-      width: 100%;
-      max-width: 420px;
-      height: auto;
-    }
-  }
-  .intro-sub {
-    margin-bottom: var(--space-lg);
-  }
-  .intro-address {
-    margin-bottom: var(--space-lg);
-  }
-  .intro-cards {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-sm);
-    margin-bottom: var(--space-xl);
-  }
-  .section-head {
-    color: var(--color-ink-subtle);
-    font-weight: 600;
-    margin-bottom: var(--space-sm);
-  }
-  .bullets {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-sm);
-  }
-  .bullets li {
-    display: flex;
-    gap: var(--space-sm);
-    color: var(--color-ink);
-    font-size: var(--type-body-sm-size);
-    line-height: var(--type-body-line);
-  }
-  .bullets .dot {
-    flex: none;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--color-ink);
-    margin-top: 9px;
-  }
-  .inline-link {
-    background: none;
-    border: none;
-    padding: 0;
-    color: var(--color-ink);
-    text-decoration: underline;
-    text-underline-offset: 3px;
-    font-size: inherit;
-  }
-  .step-eyebrow {
-    display: block;
-    color: var(--color-ink-subtle);
-    font-size: var(--type-body-sm-size);
-    margin-bottom: var(--space-2xs);
-  }
-  .field {
-    margin-top: var(--space-lg);
-  }
-  .field-head {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    margin-bottom: var(--space-xs);
-  }
-  .field-head label {
-    font-weight: 600;
-  }
-  .optional {
-    color: var(--color-ink-subtle);
-    font-size: var(--type-body-sm-size);
-    font-weight: 400;
-  }
-  textarea,
-  input[type="text"],
-  input[type="tel"] {
-    width: 100%;
-    border: 1.5px solid var(--color-border);
-    border-radius: var(--radius-lg);
-    padding: var(--space-md);
-    font-family: var(--font-body);
-    font-size: var(--type-body-size);
-    line-height: var(--type-body-line);
-    background: var(--color-surface);
-  }
-  textarea {
-    resize: vertical;
-  }
-  textarea:focus-visible,
-  input:focus-visible {
-    outline: 2px solid var(--color-ink);
-    outline-offset: 1px;
-  }
-
-  /* Desktop overrides that must beat base rules defined above */
-  @media (min-width: 1024px) {
-    .step-eyebrow {
-      display: none;
-    }
   }
 </style>
-
-<script>
-  import { initWizard } from "../scripts/wizard";
-  import { initModals } from "../scripts/modal";
-  import { initLanding } from "../scripts/landing";
-  initLanding();
-  initWizard();
-  initModals();
-</script>

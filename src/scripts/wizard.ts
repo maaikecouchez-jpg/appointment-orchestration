@@ -1,16 +1,16 @@
 // Wizard orchestrator: panel state machine, footer, persistence, the
-// step-1 datepicker + moments islands, and the shared confirm editor.
-import { initDatePicker, type DatePickerApi } from "./datepicker";
+// step-1 date picker + moments islands, and the shared confirm editor.
+import { initPicker } from "./picker";
+import { type DatePickerApi } from "./datepicker";
 import { initMoments, type MomentsApi } from "./moments";
 import { initConfirmEditor } from "./confirm-editor";
 import { firstAvailable } from "../lib/availability";
-import { withBase } from "../lib/base";
+import { vKey, vOverzicht } from "./version";
 import { config } from "../data/variables";
 import type { BookingState } from "../lib/types";
 
 type PanelId = "intro" | "date" | "extra" | "confirm";
 
-const STORAGE_KEY = "booking";
 const STEP: Record<PanelId, number> = { intro: 1, date: 1, extra: 2, confirm: 3 };
 
 function defaultState(): BookingState {
@@ -26,7 +26,7 @@ function defaultState(): BookingState {
 
 function loadState(): BookingState {
   try {
-    const raw = sessionStorage.getItem(STORAGE_KEY);
+    const raw = sessionStorage.getItem(vKey("booking"));
     if (raw) return { ...defaultState(), ...JSON.parse(raw) };
   } catch {
     /* ignore */
@@ -47,11 +47,11 @@ export function initWizard() {
   const nav = performance.getEntriesByType("navigation")[0] as
     | PerformanceNavigationTiming
     | undefined;
-  if (nav?.type === "reload" && sessionStorage.getItem("appointment-booked") !== "true") {
+  if (nav?.type === "reload" && sessionStorage.getItem(vKey("appointment-booked")) !== "true") {
     state.mode = null;
     state.date = null;
     state.moment = null;
-    sessionStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    sessionStorage.setItem(vKey("booking"), JSON.stringify(state));
   }
 
   const panels = new Map<PanelId, HTMLElement>();
@@ -69,7 +69,7 @@ export function initWizard() {
   const momentsEl = wizardRoot.querySelector<HTMLElement>("[data-moments]")!;
 
   // ── Step-1 islands ────────────────────────────────────────────────
-  const dp: DatePickerApi = initDatePicker(
+  const dp: DatePickerApi = initPicker(
     wizardRoot.querySelector<HTMLElement>("[data-datepicker]")!,
     (iso) => {
       state.date = iso;
@@ -126,7 +126,7 @@ export function initWizard() {
   let current: PanelId = "intro";
 
   function persist() {
-    sessionStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    sessionStorage.setItem(vKey("booking"), JSON.stringify(state));
   }
 
   function isValid(panel: PanelId): boolean {
@@ -207,10 +207,10 @@ export function initWizard() {
 
   function finish() {
     persist();
-    sessionStorage.setItem("appointment-booked", "true");
-    sessionStorage.setItem("booking-confirmed", "true");
+    sessionStorage.setItem(vKey("appointment-booked"), "true");
+    sessionStorage.setItem(vKey("booking-confirmed"), "true");
     // Always land on the booked appointment's detail page.
-    window.location.href = withBase("overzicht");
+    window.location.href = vOverzicht();
   }
 
   function resetWizard() {
