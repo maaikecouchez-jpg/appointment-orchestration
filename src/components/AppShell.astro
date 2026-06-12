@@ -24,8 +24,11 @@ const { footer = true } = Astro.props;
 </div>
 
 <style>
+  /* These shells live inside a fixed, full-viewport overlay, so the frame is
+     bounded to the viewport height and the content area scrolls internally
+     (on every screen size) while the footer stays pinned at the bottom. */
   .app-bg {
-    min-height: 100dvh;
+    height: 100dvh;
     background: var(--color-canvas);
     display: flex;
     flex-direction: column;
@@ -34,7 +37,8 @@ const { footer = true } = Astro.props;
   .app-frame {
     position: relative;
     width: 100%;
-    min-height: 100dvh;
+    flex: 1 1 auto;
+    min-height: 0;
     background: var(--color-canvas);
     display: flex;
     flex-direction: column;
@@ -42,26 +46,20 @@ const { footer = true } = Astro.props;
 
   .app-main {
     flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
     display: flex;
     flex-direction: column;
-    min-height: 0;
   }
 
   .app-footer {
-    position: sticky;
-    bottom: 0;
+    flex: none;
     background: var(--color-surface);
     box-shadow: var(--shadow-sm);
   }
 
   @media (min-width: 1024px) {
-    .app-frame {
-      height: 100dvh;
-      min-height: 0;
-    }
-    .app-main {
-      overflow-y: auto;
-    }
     .app-footer {
       box-shadow: 0 -1px 0 var(--color-border-subtle);
     }
