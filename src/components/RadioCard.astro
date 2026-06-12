@@ -1,0 +1,90 @@
+---
+interface Props {
+  value: string;
+  badge?: string;
+  title: string;
+  subtitle?: string;
+  checked?: boolean;
+  name?: string;
+}
+const { value, badge, title, subtitle, checked = false, name = "intro-mode" } = Astro.props;
+---
+
+<label class="radio-card" data-radio-card data-value={value}>
+  <input type="radio" name={name} value={value} checked={checked} />
+  <span class="body">
+    {badge && <span class="badge">{badge}</span>}
+    <span class="title">{title}</span>
+    {subtitle && <span class="subtitle">{subtitle}</span>}
+  </span>
+  <span class="dot" aria-hidden="true"></span>
+</label>
+
+<style>
+  .radio-card {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-md);
+    padding: var(--space-md);
+    background: var(--color-surface);
+    border: 1.5px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
+  }
+  .radio-card:has(input:checked) {
+    background: var(--color-action);
+    border-color: var(--color-ink);
+  }
+  .radio-card input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .body {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex: 1;
+  }
+  .badge {
+    align-self: flex-start;
+    background: var(--color-ink);
+    color: #fff;
+    font-size: var(--type-caption-size);
+    line-height: 1;
+    font-weight: 600;
+    padding: 6px 10px;
+    border-radius: var(--radius-pill);
+    margin-bottom: var(--space-xs);
+  }
+  .title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: var(--type-title-lg-size);
+    line-height: var(--type-title-lg-line);
+  }
+  .subtitle {
+    color: var(--color-ink-subtle);
+    font-size: var(--type-body-size);
+  }
+  .radio-card:has(input:checked) .subtitle {
+    color: rgba(20, 19, 18, 0.7);
+  }
+  .dot {
+    flex: none;
+    width: 22px;
+    height: 22px;
+    border-radius: var(--radius-pill);
+    border: 2px solid var(--color-border);
+    background: transparent;
+    margin-top: 2px;
+  }
+  .radio-card:has(input:checked) .dot {
+    border-color: var(--color-ink);
+    background:
+      radial-gradient(circle, #fff 0 5px, transparent 6px),
+      var(--color-ink);
+  }
+</style>

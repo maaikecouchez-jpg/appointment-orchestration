@@ -1,0 +1,67 @@
+---
+import GlobalHeader from "./overview/GlobalHeader.astro";
+import Sidebar from "./overview/Sidebar.astro";
+import BottomNav from "./overview/BottomNav.astro";
+import PageFooter from "./overview/PageFooter.astro";
+
+interface Props {
+  backLabel?: string;
+  backHref?: string;
+  bottomNav?: boolean;
+}
+const { backLabel, backHref, bottomNav = true } = Astro.props;
+---
+
+<div class="dash">
+  <Sidebar />
+  <div class="dash-body">
+    <GlobalHeader backLabel={backLabel} backHref={backHref} />
+    <main class="dash-main">
+      <div class="dash-content">
+        <slot />
+        <PageFooter />
+      </div>
+    </main>
+    {bottomNav && <div class="dash-bottomnav"><BottomNav /></div>}
+  </div>
+</div>
+
+<style>
+  .dash-body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100dvh;
+    background: var(--color-canvas);
+  }
+  .dash-main {
+    flex: 1 1 auto;
+  }
+  .dash-content {
+    padding: 0 var(--app-pad-x);
+  }
+  .dash-bottomnav {
+    position: sticky;
+    bottom: 0;
+    background: var(--color-surface);
+  }
+
+  @media (min-width: 1024px) {
+    .dash {
+      display: flex;
+      align-items: flex-start;
+    }
+    .dash-body {
+      flex: 1 1 auto;
+      height: 100dvh;
+      min-height: 0;
+    }
+    .dash-main {
+      overflow-y: auto;
+    }
+    .dash-content {
+      max-width: calc(var(--content-dashboard) + 2 * var(--space-2xl));
+      padding: var(--space-xl) var(--space-2xl) var(--space-2xl);
+      margin-right: auto;
+    }
+  }
+</style>

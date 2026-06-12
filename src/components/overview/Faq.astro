@@ -1,0 +1,64 @@
+---
+import { config } from "../../data/variables";
+---
+<section class="faq">
+  <h2 class="t-caption head">Veelgestelde vragen</h2>
+  <div class="items">
+    {
+      config.faq.map((item) => (
+        <details class="acc">
+          <summary>
+            <span>{item.q}</span>
+            <svg class="chev" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </summary>
+          <p>{item.a}</p>
+        </details>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  .faq {
+    margin-top: var(--space-lg);
+  }
+  .head {
+    color: var(--color-ink-subtle);
+    font-weight: 600;
+    margin-bottom: var(--space-sm);
+  }
+  .acc {
+    border-top: 1px solid var(--color-border-subtle);
+  }
+  .acc:last-child {
+    border-bottom: 1px solid var(--color-border-subtle);
+  }
+  summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-sm);
+    padding: var(--space-md) 0;
+    cursor: pointer;
+    font-weight: 600;
+    list-style: none;
+  }
+  summary::-webkit-details-marker {
+    display: none;
+  }
+  .chev {
+    flex: none;
+    transition: transform 0.2s;
+  }
+  .acc[open] .chev {
+    transform: rotate(180deg);
+  }
+  .acc p {
+    padding-bottom: var(--space-md);
+    color: var(--color-ink-subtle);
+    font-size: var(--type-body-sm-size);
+    line-height: var(--type-body-line);
+  }
+</style>

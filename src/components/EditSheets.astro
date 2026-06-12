@@ -1,0 +1,113 @@
+---
+// Shared bottom sheets for editing the appointment fields. Used by both the
+// wizard confirm step and the manage overlay.
+import Modal from "./Modal.astro";
+import DatePicker from "./DatePicker.astro";
+import MomentList from "./MomentList.astro";
+---
+
+<Modal id="edit-datetime" title="Kies een datum" variant="sheet">
+  <div data-edit-dt>
+    <DatePicker />
+    <MomentList />
+  </div>
+  <Fragment slot="footer">
+    <div class="sheet-actions">
+      <button type="button" class="btn-secondary" data-modal-close>Annuleer</button>
+      <button type="button" class="btn-primary" data-save-datetime disabled>Bewaar</button>
+    </div>
+  </Fragment>
+</Modal>
+
+<Modal id="edit-contact" title="Contactgegevens" variant="sheet">
+  <div class="sheet-field">
+    <label for="ec-name">Naam</label>
+    <input id="ec-name" data-contact-name type="text" autocomplete="name" />
+  </div>
+  <div class="sheet-field">
+    <label for="ec-phone">Telefoonnummer</label>
+    <input id="ec-phone" data-contact-phone type="tel" autocomplete="tel" />
+  </div>
+  <Fragment slot="footer">
+    <div class="sheet-actions">
+      <button type="button" class="btn-secondary" data-modal-close>Annuleer</button>
+      <button type="button" class="btn-primary" data-save-contact>Bewaar</button>
+    </div>
+  </Fragment>
+</Modal>
+
+<Modal id="edit-extra" title="Extra informatie" variant="sheet">
+  <div class="sheet-field">
+    <label for="ee-text">Extra informatie <span class="optional">Optioneel</span></label>
+    <textarea id="ee-text" data-extra-sheet-input rows="6" placeholder="Typ hier je bericht…"></textarea>
+  </div>
+  <Fragment slot="footer">
+    <div class="sheet-actions">
+      <button type="button" class="btn-secondary" data-modal-close>Annuleer</button>
+      <button type="button" class="btn-primary" data-save-extra>Bewaar</button>
+    </div>
+  </Fragment>
+</Modal>
+
+<style>
+  .sheet-field {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    margin-bottom: var(--space-md);
+  }
+  .sheet-field label {
+    font-weight: 600;
+  }
+  .optional {
+    color: var(--color-ink-subtle);
+    font-size: var(--type-body-sm-size);
+    font-weight: 400;
+  }
+  input[type="text"],
+  input[type="tel"],
+  textarea {
+    width: 100%;
+    border: 1.5px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-md);
+    font-family: var(--font-body);
+    font-size: var(--type-body-size);
+    line-height: var(--type-body-line);
+    background: var(--color-surface);
+  }
+  textarea {
+    resize: vertical;
+  }
+  input:focus-visible,
+  textarea:focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 1px;
+  }
+  .sheet-actions {
+    display: flex;
+    gap: var(--space-sm);
+  }
+  .btn-primary,
+  .btn-secondary {
+    flex: 1;
+    padding: 14px;
+    border-radius: var(--radius-pill);
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: var(--type-body-size);
+  }
+  .btn-primary {
+    background: var(--color-ink);
+    color: #fff;
+    border: 2px solid var(--color-ink);
+  }
+  .btn-primary[disabled] {
+    opacity: 0.4;
+  }
+  .btn-secondary {
+    background: var(--color-surface);
+    color: var(--color-ink);
+    border: 2px solid var(--color-ink);
+  }
+</style>

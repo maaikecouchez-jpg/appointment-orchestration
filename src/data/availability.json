@@ -1,0 +1,1225 @@
+{
+  "generatedAt": "2026-06-11",
+  "days": [
+    {
+      "date": "2026-06-11",
+      "available": true,
+      "spots": {
+        "voormiddag": true,
+        "middag": true,
+        "namiddag": true,
+        "avond": true
+      }
+    },
+    {
+      "date": "2026-06-12",
+      "available": false,
+      "spots": {
+        "voormiddag": false,
+        "middag": false,
+        "namiddag": false,
+        "avond": false
+      }
+    },
+    {
+      "date": "2026-06-13",
+      "available": false,
+      "spots": {
+        "voormiddag": false,
+        "middag": false,
+        "namiddag": false,
+        "avond": false
+      }
+    },
+    {
+      "date": "2026-06-14",
+      "available": false,
+      "spots": {
+        "voormiddag": false,
+        "middag": false,
+        "namiddag": false,
+        "avond": false
+      }
+    },
+    {
+      "date": "2026-06-15",
+      "available": true,
+      "spots": {
+        "voormiddag": true,
+        "middag": true,
+        "namiddag": true,
+        "avond": false
+      }
+    },
+    {
+      "date": "2026-06-16",
+      "available": false,
+      "spots": {
+        "voormiddag": false,
+        "middag": false,
+        "namiddag": false,
+        "avond": false
+      }
+    },
+    {
+      "date": "2026-06-17",
+      "available": true,
+      "spots": {
+        "voormiddag": true,
+        "middag": true,
+        "namiddag": true,
+        "avond": true
+      }
+    },
+    {
+      "date": "2026-06-18",
+      "available": true,
+      "spots": {
+        "voormiddag": true,
+        "middag": true,
+        "namiddag": true,
+        "avond": true
+      }
+    },
+    {
+      "date": "2026-06-19",
+      "available": false,
+      "spots": {
+        "voormiddag": false,
+        "middag": false,
+        "namiddag": false,
+        "avond": false
+      }
+    },
+    {
+      "date": "2026-06-20",
+      "available": false,
+      "spots": {
+        "voormiddag": false,
+        "middag": false,
+        "namiddag": false,
+        "avond": false
+      }
+    },
+    {
+      "date": "2026-06-21",
+      "available": false,
+      "spots": {
+        "voormiddag": false,
+        "middag": false,
+        "namiddag": false,
+        "avond": false
+      }
+    },
+    {
+      "date": "2026-06-22",
+      "available": true,
+      "spots": {
+        "voormiddag": true,
+        "middag": false,
+        "namiddag": true,
+        "avond": false
+      }
+    },
+    {
+      "date": "2026-06-23",
+      "available": true,
+      "spots": {
+        "voormiddag": true,
+        "middag": true,
+        "namiddag": false,
+        "avond": true
+      }
+    },
+    {
+      "date": "2026-06-24",
+      "available": false,
+      "spots": {
+        "voormiddag": false,
+        "middag": false,
+        "namiddag": false,
+        "avond": false
+      }
+    },
+    {
+      "date": "2026-06-25",
+      "available": true,
+      "spots": {
+        "voormiddag": false,
+        "middag": true,
+        "namiddag": true,
+        "avond": true
+      }
+    },
+    {
+      "date": "2026-06-26",
+      "available": false,
+      "spots": {
+        "voormiddag": false,
+        "middag": false,
+        "namiddag": false,
+        "avond": false
+      }
+    },
+    {
+      "date": "2026-06-27",
+      "available": false,
+      "spots": {
+        "voormiddag": false,
+        "middag": false,
+        "namiddag": false,
+        "avond": false
+      }
+    },
+    {
+      "date": "2026-06-28",
+      "available": false,
+      "spots": {
+        "voormiddag": false,
+        "middag": false,
+        "namiddag": false,
+        "avond": false
+      }
+    },
+    {
+      "date": "2026-06-29",
+      "available": true,
+      "spots": {
+        "voormiddag": true,
+        "middag": true,
+        "namiddag": true,
+        "avond": true
+      }
+    },
+    {
+      "date": "2026-06-30",
+      "available": true,
+      "spots": {
+        "voormiddag": false,
+        "middag": true,
+        "namiddag": false,
+        "avond": false
+      }
+    },
+    {
+      "date": "2026-07-01",
+      "available": true,
+      "spots": {
+        "voormiddag": true,
+        "middag": true,
+        "namiddag": true,
+        "avond": true
+      }
+    },
+    {
+      "date": "2026-07-02",
+      "available": true,
+      "spots": {
+        "voormiddag": true,
+        "middag": true,
+        "namiddag": true,
+        "avond": false
+      }
+    },
+    {
+      "date": "2026-07-03",
+      "available": false,
+      "spots": {
+        "voormiddag": false,
+        "middag": false,
+        "namiddag": false,
+        "avond": false
+      }
+    },
+    {
+      "date": "2026-07-04",
+      "available": false,
+      "spots": {
+        "voormiddag": false,
+        "middag": false,
+        "namiddag": false,
+        "avond": false
+      }
+    },
+    {
+      "date": "2026-07-05",
+      "available": false,
+      "spots": {
+        "voormiddag": false,
+        "middag": false,
+        "namiddag": false,
+        "avond": false
+      }
+    },
+    {
+      "date": "2026-07-06",
+      "available": false,
+      "spots": {
+        "voormiddag": false,
+        "middag": false,
+        "namiddag": false,
+        "avond": false
+      }
+    },
+    {
+      "date": "2026-07-07",
+      "available": true,
+      "spots": {
+        "voormiddag": false,
+        "middag": false,
+        "namiddag": true,
+        "avond": true
+      }
+    },
+    {
+      "date": "2026-07-08",
+      "available": false,
+      "spots": {
+        "voormiddag": false,
+        "middag": false,
+        "namiddag": false,
+        "avond": false
+      }
+    },
+    {
+      "date": "2026-07-09",
+      "available": false,
+      "spots": {
+        "voormiddag": false,
+        "middag": false,
+        "namiddag": false,
+        "avond": false
+      }
+    },
+    {
+      "date": "2026-07-10",
+      "available": false,
+      "spots": {
+        "voormiddag": false,
+        "middag": false,
+        "namiddag": false,
+        "avond": false
+      }
+    },
+    {
+      "date": "2026-07-11",
+      "available": false,
+      "spots": {
+        "voormiddag": false,
+        "middag": false,
+        "namiddag": false,
+        "avond": false
+      }
+    },
+    {
+      "date": "2026-07-12",
+      "available": false,
+      "spots": {
+        "voormiddag": false,
+        "middag": false,
+        "namiddag": false,
+        "avond": false
+      }
+    },
+    {
+      "date": "2026-07-13",
+      "available": false,
+      "spots": {
+        "voormiddag": false,
+        "middag": false,
+        "namiddag": false,
+        "avond": false
+      }
+    },
+    {
+      "date": "2026-07-14",
+      "available": false,
+      "spots": {
+        "voormiddag": false,
+        "middag": false,
+        "namiddag": false,
+        "avond": false
+      }
+    },
+    {
+      "date": "2026-07-15",
+      "available": true,
+      "spots": {
+        "voormiddag": true,
+        "middag": true,
+        "namiddag": true,
+        "avond": true
+      }
+    },
+    {
+      "date": "2026-07-16",
+      "available": true,
+      "spots": {
+        "voormiddag": true,
+        "middag": false,
+        "namiddag": false,
+        "avond": false
+      }
+    },
+    {
+      "date": "2026-07-17",
+      "available": true,
+      "spots": {
+        "voormiddag": true,
+        "middag": true,
+        "namiddag": false,
+        "avond": true
+      }
+    },
+    {
+      "date": "2026-07-18",
+      "available": false,
+      "spots": {
+        "voormiddag": false,
+        "middag": false,
+        "namiddag": false,
+        "avond": false
+      }
+    },
+    {
+      "date": "2026-07-19",
+      "available": false,
+      "spots": {
+        "voormiddag": false,
+        "middag": false,
+        "namiddag": false,
+        "avond": false
+      }
+    },
+    {
+      "date": "2026-07-20",
+      "available": false,
+      "spots": {
+        "voormiddag": false,
+        "middag": false,
+        "namiddag": false,
+        "avond": false
+      }
+    },
+    {
+      "date": "2026-07-21",
+      "available": true,
+      "spots": {
+        "voormiddag": true,
+        "middag": true,
+        "namiddag": true,
+        "avond": true
+      }
+    },
+    {
+      "date": "2026-07-22",
+      "available": true,
+      "spots": {
+        "voormiddag": true,
+        "middag": true,
+        "namiddag": true,
+        "avond": true
+      }
+    },
+    {
+      "date": "2026-07-23",
+      "available": true,
+      "spots": {
+        "voormiddag": false,
+        "middag": false,
+        "namiddag": true,
+        "avond": true
+      }
+    },
+    {
+      "date": "2026-07-24",
+      "available": false,
+      "spots": {
+        "voormiddag": false,
+        "middag": false,
+        "namiddag": false,
+        "avond": false
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "available": false,
+      "spots": {
+        "voormiddag": false,
+        "middag": false,
+        "namiddag": false,
+        "avond": false
+      }
+    },
+    {
+      "date": "2026-07-26",
+      "available": false,
+      "spots": {
+        "voormiddag": false,
+        "middag": false,
+        "namiddag": false,
+        "avond": false
+      }
+    },
+    {
+      "date": "2026-07-27",
+      "available": true,
+      "spots": {
+        "voormiddag": true,
+        "middag": true,
+        "namiddag": false,
+        "avond": true
+      }
+    },
+    {
+      "date": "2026-07-28",
+      "available": false,
+      "spots": {
+        "voormiddag": false,
+        "middag": false,
+        "namiddag": false,
+        "avond": false
+      }
+    },
+    {
+      "date": "2026-07-29",
+      "available": false,
+      "spots": {
+        "voormiddag": false,
+        "middag": false,
+        "namiddag": false,
+        "avond": false
+      }
+    },
+    {
+      "date": "2026-07-30",
+      "available": false,
+      "spots": {
+        "voormiddag": false,
+        "middag": false,
+        "namiddag": false,
+        "avond": false
+      }
+    },
+    {
+      "date": "2026-07-31",
+      "available": true,
+      "spots": {
+        "voormiddag": true,
+        "middag": true,
+        "namiddag": true,
+        "avond": false
+      }
+    },
+    {
+      "date": "2026-08-01",
+      "available": false,
+      "spots": {
+        "voormiddag": false,
+        "middag": false,
+        "namiddag": false,
+        "avond": false
+      }
+    },
+    {
+      "date": "2026-08-02",
+      "available": false,
+      "spots": {
+        "voormiddag": false,
+        "middag": false,
+        "namiddag": false,
+        "avond": false
+      }
+    },
+    {
+      "date": "2026-08-03",
+      "available": false,
+      "spots": {
+        "voormiddag": false,
+        "middag": false,
+        "namiddag": false,
+        "avond": false
+      }
+    },
+    {
+      "date": "2026-08-04",
+      "available": false,
+      "spots": {
+        "voormiddag": false,
+        "middag": false,
+        "namiddag": false,
+        "avond": false
+      }
+    },
+    {
+      "date": "2026-08-05",
+      "available": false,
+      "spots": {
+        "voormiddag": false,
+        "middag": false,
+        "namiddag": false,
+        "avond": false
+      }
+    },
+    {
+      "date": "2026-08-06",
+      "available": false,
+      "spots": {
+        "voormiddag": false,
+        "middag": false,
+        "namiddag": false,
+        "avond": false
+      }
+    },
+    {
+      "date": "2026-08-07",
+      "available": false,
+      "spots": {
+        "voormiddag": false,
+        "middag": false,
+        "namiddag": false,
+        "avond": false
+      }
+    },
+    {
+      "date": "2026-08-08",
+      "available": false,
+      "spots": {
+        "voormiddag": false,
+        "middag": false,
+        "namiddag": false,
+        "avond": false
+      }
+    },
+    {
+      "date": "2026-08-09",
+      "available": false,
+      "spots": {
+        "voormiddag": false,
+        "middag": false,
+        "namiddag": false,
+        "avond": false
+      }
+    },
+    {
+      "date": "2026-08-10",
+      "available": false,
+      "spots": {
+        "voormiddag": false,
+        "middag": false,
+        "namiddag": false,
+        "avond": false
+      }
+    },
+    {
+      "date": "2026-08-11",
+      "available": true,
+      "spots": {
+        "voormiddag": true,
+        "middag": true,
+        "namiddag": false,
+        "avond": false
+      }
+    },
+    {
+      "date": "2026-08-12",
+      "available": true,
+      "spots": {
+        "voormiddag": true,
+        "middag": true,
+        "namiddag": true,
+        "avond": true
+      }
+    },
+    {
+      "date": "2026-08-13",
+      "available": true,
+      "spots": {
+        "voormiddag": false,
+        "middag": true,
+        "namiddag": true,
+        "avond": false
+      }
+    },
+    {
+      "date": "2026-08-14",
+      "available": true,
+      "spots": {
+        "voormiddag": true,
+        "middag": true,
+        "namiddag": true,
+        "avond": true
+      }
+    },
+    {
+      "date": "2026-08-15",
+      "available": false,
+      "spots": {
+        "voormiddag": false,
+        "middag": false,
+        "namiddag": false,
+        "avond": false
+      }
+    },
+    {
+      "date": "2026-08-16",
+      "available": false,
+      "spots": {
+        "voormiddag": false,
+        "middag": false,
+        "namiddag": false,
+        "avond": false
+      }
+    },
+    {
+      "date": "2026-08-17",
+      "available": false,
+      "spots": {
+        "voormiddag": false,
+        "middag": false,
+        "namiddag": false,
+        "avond": false
+      }
+    },
+    {
+      "date": "2026-08-18",
+      "available": false,
+      "spots": {
+        "voormiddag": false,
+        "middag": false,
+        "namiddag": false,
+        "avond": false
+      }
+    },
+    {
+      "date": "2026-08-19",
+      "available": false,
+      "spots": {
+        "voormiddag": false,
+        "middag": false,
+        "namiddag": false,
+        "avond": false
+      }
+    },
+    {
+      "date": "2026-08-20",
+      "available": false,
+      "spots": {
+        "voormiddag": false,
+        "middag": false,
+        "namiddag": false,
+        "avond": false
+      }
+    },
+    {
+      "date": "2026-08-21",
+      "available": false,
+      "spots": {
+        "voormiddag": false,
+        "middag": false,
+        "namiddag": false,
+        "avond": false
+      }
+    },
+    {
+      "date": "2026-08-22",
+      "available": false,
+      "spots": {
+        "voormiddag": false,
+        "middag": false,
+        "namiddag": false,
+        "avond": false
+      }
+    },
+    {
+      "date": "2026-08-23",
+      "available": false,
+      "spots": {
+        "voormiddag": false,
+        "middag": false,
+        "namiddag": false,
+        "avond": false
+      }
+    },
+    {
+      "date": "2026-08-24",
+      "available": false,
+      "spots": {
+        "voormiddag": false,
+        "middag": false,
+        "namiddag": false,
+        "avond": false
+      }
+    },
+    {
+      "date": "2026-08-25",
+      "available": true,
+      "spots": {
+        "voormiddag": true,
+        "middag": true,
+        "namiddag": false,
+        "avond": true
+      }
+    },
+    {
+      "date": "2026-08-26",
+      "available": true,
+      "spots": {
+        "voormiddag": false,
+        "middag": false,
+        "namiddag": false,
+        "avond": true
+      }
+    },
+    {
+      "date": "2026-08-27",
+      "available": true,
+      "spots": {
+        "voormiddag": true,
+        "middag": true,
+        "namiddag": true,
+        "avond": true
+      }
+    },
+    {
+      "date": "2026-08-28",
+      "available": false,
+      "spots": {
+        "voormiddag": false,
+        "middag": false,
+        "namiddag": false,
+        "avond": false
+      }
+    },
+    {
+      "date": "2026-08-29",
+      "available": false,
+      "spots": {
+        "voormiddag": false,
+        "middag": false,
+        "namiddag": false,
+        "avond": false
+      }
+    },
+    {
+      "date": "2026-08-30",
+      "available": false,
+      "spots": {
+        "voormiddag": false,
+        "middag": false,
+        "namiddag": false,
+        "avond": false
+      }
+    },
+    {
+      "date": "2026-08-31",
+      "available": false,
+      "spots": {
+        "voormiddag": false,
+        "middag": false,
+        "namiddag": false,
+        "avond": false
+      }
+    },
+    {
+      "date": "2026-09-01",
+      "available": true,
+      "spots": {
+        "voormiddag": true,
+        "middag": true,
+        "namiddag": true,
+        "avond": true
+      }
+    },
+    {
+      "date": "2026-09-02",
+      "available": false,
+      "spots": {
+        "voormiddag": false,
+        "middag": false,
+        "namiddag": false,
+        "avond": false
+      }
+    },
+    {
+      "date": "2026-09-03",
+      "available": true,
+      "spots": {
+        "voormiddag": false,
+        "middag": false,
+        "namiddag": true,
+        "avond": true
+      }
+    },
+    {
+      "date": "2026-09-04",
+      "available": true,
+      "spots": {
+        "voormiddag": true,
+        "middag": true,
+        "namiddag": false,
+        "avond": true
+      }
+    },
+    {
+      "date": "2026-09-05",
+      "available": false,
+      "spots": {
+        "voormiddag": false,
+        "middag": false,
+        "namiddag": false,
+        "avond": false
+      }
+    },
+    {
+      "date": "2026-09-06",
+      "available": false,
+      "spots": {
+        "voormiddag": false,
+        "middag": false,
+        "namiddag": false,
+        "avond": false
+      }
+    },
+    {
+      "date": "2026-09-07",
+      "available": false,
+      "spots": {
+        "voormiddag": false,
+        "middag": false,
+        "namiddag": false,
+        "avond": false
+      }
+    },
+    {
+      "date": "2026-09-08",
+      "available": true,
+      "spots": {
+        "voormiddag": true,
+        "middag": false,
+        "namiddag": true,
+        "avond": true
+      }
+    },
+    {
+      "date": "2026-09-09",
+      "available": false,
+      "spots": {
+        "voormiddag": false,
+        "middag": false,
+        "namiddag": false,
+        "avond": false
+      }
+    },
+    {
+      "date": "2026-09-10",
+      "available": false,
+      "spots": {
+        "voormiddag": false,
+        "middag": false,
+        "namiddag": false,
+        "avond": false
+      }
+    },
+    {
+      "date": "2026-09-11",
+      "available": true,
+      "spots": {
+        "voormiddag": true,
+        "middag": false,
+        "namiddag": true,
+        "avond": true
+      }
+    },
+    {
+      "date": "2026-09-12",
+      "available": false,
+      "spots": {
+        "voormiddag": false,
+        "middag": false,
+        "namiddag": false,
+        "avond": false
+      }
+    },
+    {
+      "date": "2026-09-13",
+      "available": false,
+      "spots": {
+        "voormiddag": false,
+        "middag": false,
+        "namiddag": false,
+        "avond": false
+      }
+    },
+    {
+      "date": "2026-09-14",
+      "available": false,
+      "spots": {
+        "voormiddag": false,
+        "middag": false,
+        "namiddag": false,
+        "avond": false
+      }
+    },
+    {
+      "date": "2026-09-15",
+      "available": true,
+      "spots": {
+        "voormiddag": true,
+        "middag": true,
+        "namiddag": true,
+        "avond": true
+      }
+    },
+    {
+      "date": "2026-09-16",
+      "available": false,
+      "spots": {
+        "voormiddag": false,
+        "middag": false,
+        "namiddag": false,
+        "avond": false
+      }
+    },
+    {
+      "date": "2026-09-17",
+      "available": true,
+      "spots": {
+        "voormiddag": true,
+        "middag": false,
+        "namiddag": true,
+        "avond": true
+      }
+    },
+    {
+      "date": "2026-09-18",
+      "available": false,
+      "spots": {
+        "voormiddag": false,
+        "middag": false,
+        "namiddag": false,
+        "avond": false
+      }
+    },
+    {
+      "date": "2026-09-19",
+      "available": false,
+      "spots": {
+        "voormiddag": false,
+        "middag": false,
+        "namiddag": false,
+        "avond": false
+      }
+    },
+    {
+      "date": "2026-09-20",
+      "available": false,
+      "spots": {
+        "voormiddag": false,
+        "middag": false,
+        "namiddag": false,
+        "avond": false
+      }
+    },
+    {
+      "date": "2026-09-21",
+      "available": true,
+      "spots": {
+        "voormiddag": false,
+        "middag": true,
+        "namiddag": true,
+        "avond": true
+      }
+    },
+    {
+      "date": "2026-09-22",
+      "available": true,
+      "spots": {
+        "voormiddag": true,
+        "middag": true,
+        "namiddag": true,
+        "avond": true
+      }
+    },
+    {
+      "date": "2026-09-23",
+      "available": false,
+      "spots": {
+        "voormiddag": false,
+        "middag": false,
+        "namiddag": false,
+        "avond": false
+      }
+    },
+    {
+      "date": "2026-09-24",
+      "available": false,
+      "spots": {
+        "voormiddag": false,
+        "middag": false,
+        "namiddag": false,
+        "avond": false
+      }
+    },
+    {
+      "date": "2026-09-25",
+      "available": true,
+      "spots": {
+        "voormiddag": false,
+        "middag": false,
+        "namiddag": true,
+        "avond": false
+      }
+    },
+    {
+      "date": "2026-09-26",
+      "available": false,
+      "spots": {
+        "voormiddag": false,
+        "middag": false,
+        "namiddag": false,
+        "avond": false
+      }
+    },
+    {
+      "date": "2026-09-27",
+      "available": false,
+      "spots": {
+        "voormiddag": false,
+        "middag": false,
+        "namiddag": false,
+        "avond": false
+      }
+    },
+    {
+      "date": "2026-09-28",
+      "available": true,
+      "spots": {
+        "voormiddag": true,
+        "middag": true,
+        "namiddag": true,
+        "avond": true
+      }
+    },
+    {
+      "date": "2026-09-29",
+      "available": false,
+      "spots": {
+        "voormiddag": false,
+        "middag": false,
+        "namiddag": false,
+        "avond": false
+      }
+    },
+    {
+      "date": "2026-09-30",
+      "available": true,
+      "spots": {
+        "voormiddag": false,
+        "middag": false,
+        "namiddag": true,
+        "avond": false
+      }
+    },
+    {
+      "date": "2026-10-01",
+      "available": false,
+      "spots": {
+        "voormiddag": false,
+        "middag": false,
+        "namiddag": false,
+        "avond": false
+      }
+    },
+    {
+      "date": "2026-10-02",
+      "available": false,
+      "spots": {
+        "voormiddag": false,
+        "middag": false,
+        "namiddag": false,
+        "avond": false
+      }
+    },
+    {
+      "date": "2026-10-03",
+      "available": false,
+      "spots": {
+        "voormiddag": false,
+        "middag": false,
+        "namiddag": false,
+        "avond": false
+      }
+    },
+    {
+      "date": "2026-10-04",
+      "available": false,
+      "spots": {
+        "voormiddag": false,
+        "middag": false,
+        "namiddag": false,
+        "avond": false
+      }
+    },
+    {
+      "date": "2026-10-05",
+      "available": false,
+      "spots": {
+        "voormiddag": false,
+        "middag": false,
+        "namiddag": false,
+        "avond": false
+      }
+    },
+    {
+      "date": "2026-10-06",
+      "available": false,
+      "spots": {
+        "voormiddag": false,
+        "middag": false,
+        "namiddag": false,
+        "avond": false
+      }
+    },
+    {
+      "date": "2026-10-07",
+      "available": true,
+      "spots": {
+        "voormiddag": false,
+        "middag": true,
+        "namiddag": true,
+        "avond": true
+      }
+    },
+    {
+      "date": "2026-10-08",
+      "available": true,
+      "spots": {
+        "voormiddag": true,
+        "middag": false,
+        "namiddag": true,
+        "avond": true
+      }
+    },
+    {
+      "date": "2026-10-09",
+      "available": false,
+      "spots": {
+        "voormiddag": false,
+        "middag": false,
+        "namiddag": false,
+        "avond": false
+      }
+    },
+    {
+      "date": "2026-10-10",
+      "available": false,
+      "spots": {
+        "voormiddag": false,
+        "middag": false,
+        "namiddag": false,
+        "avond": false
+      }
+    }
+  ]
+}

@@ -1,0 +1,140 @@
+---
+import { visibleDays, dayAbbr, dayNum, monthAbbr, isWeekend } from "../lib/availability";
+
+const PAGE = 15; // cells per page (3 rows × 5)
+---
+
+<div class="datepicker" data-datepicker data-page={PAGE}>
+  <div class="pager">
+    <button type="button" class="pager-btn" data-prev disabled>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path>
+      </svg>
+      <span>Vroeger</span>
+    </button>
+    <button type="button" class="pager-btn" data-next-page>
+      <span>Later</span>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path>
+      </svg>
+    </button>
+  </div>
+
+  <div class="grid" data-grid role="listbox" aria-label="Kies een datum">
+    {
+      visibleDays.map((d, i) => (
+        <button
+          type="button"
+          class="cell"
+          data-cell
+          data-index={i}
+          data-date={d.date}
+          data-available={d.available ? "true" : "false"}
+          data-weekend={isWeekend(d.date) ? "true" : "false"}
+          disabled={!d.available}
+          role="option"
+          aria-disabled={!d.available}
+          hidden={i >= PAGE}
+        >
+          <span class="d-abbr">{dayAbbr(d.date)}</span>
+          <span class="d-num">{dayNum(d.date)}</span>
+          <span class="d-month">{monthAbbr(d.date)}</span>
+        </button>
+      ))
+    }
+  </div>
+</div>
+
+<style>
+  .datepicker {
+    margin-top: var(--space-md);
+    container-type: inline-size;
+  }
+  .pager {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: var(--space-md);
+  }
+  .pager-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: none;
+    border: none;
+    padding: 4px 0;
+    color: var(--color-ink);
+    font-size: var(--type-body-size);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+  .pager-btn[disabled] {
+    color: var(--color-ink-subtlest);
+    text-decoration: none;
+    cursor: default;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: var(--space-xs);
+  }
+
+  /* Wide container (desktop wizard step) → 7-column week rows */
+  @container (min-width: 600px) {
+    .grid {
+      grid-template-columns: repeat(7, 1fr);
+      gap: var(--space-sm);
+    }
+  }
+  .cell {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    padding: 12px 2px;
+    background: var(--color-surface);
+    border: 1.5px solid var(--color-border-subtle);
+    border-radius: var(--radius-card);
+    color: var(--color-ink);
+    min-height: 78px;
+    justify-content: center;
+  }
+  .d-abbr {
+    font-size: 11px;
+    color: var(--color-ink-subtle);
+    letter-spacing: 0.02em;
+  }
+  .d-num {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 1;
+  }
+  .d-month {
+    font-size: 12px;
+    color: var(--color-ink-subtle);
+  }
+
+  /* Unavailable */
+  .cell[data-available="false"] {
+    background: var(--color-canvas-neutral);
+    border-color: transparent;
+    cursor: default;
+  }
+  .cell[data-available="false"] .d-abbr,
+  .cell[data-available="false"] .d-num,
+  .cell[data-available="false"] .d-month {
+    color: var(--color-ink-subtlest);
+  }
+
+  /* Selected */
+  .cell[data-selected="true"] {
+    background: var(--color-action);
+    border-color: var(--color-ink);
+  }
+  .cell[data-selected="true"] .d-abbr,
+  .cell[data-selected="true"] .d-num,
+  .cell[data-selected="true"] .d-month {
+    color: var(--color-ink);
+  }
+</style>

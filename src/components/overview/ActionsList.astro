@@ -1,0 +1,60 @@
+---
+---
+<div class="actions">
+  <button type="button" class="row" data-action="calendar">
+    <span class="lead">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="3" stroke="currentColor" stroke-width="1.8"/><path d="M4 9h16M8 3v4M16 3v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      <span>Toevoegen aan kalender</span>
+    </span>
+    <svg class="ext" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 5h5v5M19 5l-8 8M11 5H6a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2v-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+  <button type="button" class="row" data-action="share">
+    <span class="lead">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 15V4M8 8l4-4 4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 12v6a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      <span>Afspraak delen</span>
+    </span>
+    <svg class="ext" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 5h5v5M19 5l-8 8M11 5H6a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2v-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+  <button type="button" class="row danger" data-action="delete">
+    <span class="lead">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 7h14M10 11v6M14 11v6M6 7l1 12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-12M9 7V4h6v3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span>Afspraak verwijderen</span>
+    </span>
+  </button>
+</div>
+
+<style>
+  .actions {
+    background: var(--color-surface);
+    border-radius: var(--radius-lg);
+    padding: var(--space-2xs) var(--space-md);
+    box-shadow: var(--shadow-card);
+  }
+  .row {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-sm);
+    padding: var(--space-md) 0;
+    background: none;
+    border: none;
+    color: var(--color-ink);
+    font-size: var(--type-body-size);
+    text-align: left;
+  }
+  .row + .row {
+    border-top: 1px solid var(--color-border-subtle);
+  }
+  .lead {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-md);
+  }
+  .ext {
+    color: var(--color-ink-subtle);
+  }
+  .danger {
+    color: #c8102e;
+  }
+</style>

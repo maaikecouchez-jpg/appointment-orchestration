@@ -1,0 +1,121 @@
+@import "./tokens.css";
+
+/* Google-font lookalikes for the licensed Telenet fonts:
+   - Archivo        → PP Right Telenet (display)
+   - Hanken Grotesk → Telenet Albra Sans (body) */
+@import url("https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Hanken+Grotesk:wght@400;500;600;700&display=swap");
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Ensure the `hidden` attribute always wins over component display rules
+   (flex/grid set on .btn, .cell, .moment, panels, etc.) */
+[hidden] {
+  display: none !important;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: var(--type-body-size);
+  line-height: var(--type-body-line);
+  color: var(--color-ink);
+  background: var(--color-canvas-neutral);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+p {
+  margin: 0;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+}
+
+img,
+svg {
+  display: block;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-ink);
+  outline-offset: 2px;
+}
+
+/* Reusable type helpers */
+.t-display {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--type-display-2xl-size);
+  line-height: var(--type-display-2xl-line);
+  letter-spacing: -0.02em;
+}
+
+.t-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--type-title-xl-size);
+  line-height: var(--type-title-xl-line);
+}
+
+.t-title-lg {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--type-title-lg-size);
+  line-height: var(--type-title-lg-line);
+}
+
+.t-body {
+  font-size: var(--type-body-size);
+  line-height: var(--type-body-line);
+}
+
+.t-subtle {
+  color: var(--color-ink-subtle);
+}
+
+.t-caption {
+  font-size: var(--type-caption-size);
+  line-height: var(--type-caption-line);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

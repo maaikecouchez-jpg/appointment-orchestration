@@ -1,0 +1,74 @@
+---
+interface Props {
+  icon: "calendar" | "chat" | "info";
+  label: string;
+  editTarget: string;
+  variant?: "dark" | "light";
+}
+const { icon, label, editTarget, variant = "light" } = Astro.props;
+
+const icons = {
+  calendar: '<rect x="4" y="5" width="16" height="15" rx="3" stroke="currentColor" stroke-width="1.8"/><path d="M4 9h16M8 3v4M16 3v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>',
+  chat: '<path d="M5 6h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H9l-4 3V7a1 1 0 0 1 1-1Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>',
+  info: '<circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M12 11v5M12 8h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>',
+};
+---
+
+<div class:list={["summary-row", variant]}>
+  <span class="s-icon" aria-hidden="true">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" set:html={icons[icon]} />
+  </span>
+  <div class="s-body">
+    <span class="s-label">{label}</span>
+    <div class="s-content"><slot /></div>
+  </div>
+  <button type="button" class="s-edit" data-edit={editTarget} aria-label={`${label} bewerken`}>
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M4 20h4L18.5 9.5a2 2 0 0 0-2.83-2.83L5 17.5V20Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"></path>
+    </svg>
+  </button>
+</div>
+
+<style>
+  .summary-row {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: var(--space-sm);
+    align-items: start;
+  }
+  .s-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-card);
+    background: var(--color-action);
+    color: var(--color-ink);
+    flex: none;
+  }
+  .s-label {
+    color: var(--color-ink-subtle);
+    font-size: var(--type-body-sm-size);
+    display: block;
+    margin-bottom: 2px;
+  }
+  .s-content {
+    font-size: var(--type-body-size);
+    line-height: var(--type-body-line);
+  }
+  .s-edit {
+    background: none;
+    border: none;
+    color: currentColor;
+    padding: 4px;
+    border-radius: 8px;
+  }
+
+  .dark .s-label {
+    color: rgba(255, 255, 255, 0.7);
+  }
+  .dark {
+    color: #fff;
+  }
+</style>

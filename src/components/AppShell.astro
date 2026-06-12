@@ -1,0 +1,69 @@
+---
+/* Overlay shell used by the wizard + manage overlays.
+   Mobile: full-bleed column. Desktop: full-screen with a header + scrolling
+   content (centered by the panels) + a full-width sticky footer. */
+interface Props {
+  footer?: boolean;
+}
+const { footer = true } = Astro.props;
+---
+
+<div class="app-bg">
+  <div class="app-frame">
+    <main class="app-main">
+      <slot />
+    </main>
+    {
+      footer && (
+        <div class="app-footer">
+          <slot name="footer" />
+        </div>
+      )
+    }
+  </div>
+</div>
+
+<style>
+  .app-bg {
+    min-height: 100dvh;
+    background: var(--color-canvas);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .app-frame {
+    position: relative;
+    width: 100%;
+    min-height: 100dvh;
+    background: var(--color-canvas);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .app-main {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  .app-footer {
+    position: sticky;
+    bottom: 0;
+    background: var(--color-surface);
+    box-shadow: var(--shadow-sm);
+  }
+
+  @media (min-width: 1024px) {
+    .app-frame {
+      height: 100dvh;
+      min-height: 0;
+    }
+    .app-main {
+      overflow-y: auto;
+    }
+    .app-footer {
+      box-shadow: 0 -1px 0 var(--color-border-subtle);
+    }
+  }
+</style>

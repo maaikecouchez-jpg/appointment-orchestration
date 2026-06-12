@@ -1,0 +1,70 @@
+---
+---
+
+<header class="app-header">
+  <span class="logo" aria-label="Telenet">
+    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+      <rect width="40" height="40" rx="10" fill="var(--color-ink)" />
+      <circle cx="14" cy="18" r="2.4" fill="#fff" />
+      <circle cx="26" cy="18" r="2.4" fill="#fff" />
+      <path d="M12.5 25c2.2 2.4 12.8 2.4 15 0" stroke="#fff" stroke-width="2.4" stroke-linecap="round" />
+    </svg>
+  </span>
+  <button type="button" class="close" data-wizard-close aria-label="Sluiten">
+    <span class="close-label">Sluiten</span>
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+    </svg>
+  </button>
+</header>
+
+<style>
+  .app-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-md) var(--app-pad-x);
+    background: var(--color-canvas);
+  }
+  .logo {
+    display: inline-flex;
+  }
+  .close {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-xs);
+    width: 40px;
+    height: 40px;
+    margin-right: -8px;
+    color: var(--color-ink);
+    border-radius: var(--radius-pill);
+    background: none;
+    border: none;
+  }
+  .close:hover {
+    background: var(--color-canvas-neutral);
+  }
+  .close-label {
+    display: none;
+    font-size: var(--type-body-sm-size);
+    color: var(--color-ink-subtle);
+  }
+
+  @media (min-width: 1024px) {
+    .app-header {
+      background: var(--color-surface);
+      border-bottom: 1px solid var(--color-border-subtle);
+      padding: var(--space-md) var(--space-2xl);
+    }
+    .close {
+      width: auto;
+      gap: var(--space-xs);
+      padding: 6px 10px;
+      margin-right: 0;
+    }
+    .close-label {
+      display: inline;
+    }
+  }
+</style>

@@ -1,0 +1,20 @@
+{
+  "name": "fiber-appointment-prototype",
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "gen:data": "node scripts/generate-availability.mjs"
+  },
+  "dependencies": {
+    "astro": "^4.16.18"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.9",
+    "typescript": "^5.9.3"
+  }
+}

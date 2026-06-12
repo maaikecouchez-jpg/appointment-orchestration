@@ -1,0 +1,49 @@
+---
+// Shared "appointment summary" body — used identically by the wizard's
+// "Bevestig je afspraak" step and the "Beheer je afspraak" overlay.
+import ConfirmCard from "./ConfirmCard.astro";
+import { config } from "../data/variables";
+---
+
+<div class="confirm-cards" data-confirm-content>
+  <ConfirmCard icon="calendar" label="Installatiedatum" sheet="edit-datetime">
+    <span data-confirm-date>—</span>
+    <span data-confirm-moment class="t-subtle confirm-sub">—</span>
+  </ConfirmCard>
+  <ConfirmCard icon="chat" label="Contactgegevens" sheet="edit-contact">
+    <span data-confirm-name>—</span>
+    <span data-confirm-phone class="confirm-sub">—</span>
+  </ConfirmCard>
+  <ConfirmCard icon="info" label="Extra informatie" sheet="edit-extra">
+    <span data-confirm-extra class="t-subtle">Voeg extra informatie toe</span>
+  </ConfirmCard>
+</div>
+<p class="confirm-notice">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M12 11v5M12 8h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+  <span>{config.notice}</span>
+</p>
+
+<style>
+  .confirm-cards {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    margin-top: var(--space-md);
+  }
+  .confirm-sub {
+    display: block;
+  }
+  .confirm-notice {
+    display: flex;
+    gap: var(--space-xs);
+    align-items: flex-start;
+    margin-top: var(--space-md);
+    color: var(--color-ink-subtle);
+    font-size: var(--type-body-sm-size);
+    line-height: var(--type-body-line);
+  }
+  .confirm-notice svg {
+    flex: none;
+    margin-top: 2px;
+  }
+</style>

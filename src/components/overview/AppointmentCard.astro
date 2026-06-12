@@ -1,0 +1,111 @@
+---
+import { config } from "../../data/variables";
+---
+<div class="apt-card">
+  <div class="apt-top">
+    <span class="apt-icon" aria-hidden="true">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <rect x="4" y="5" width="16" height="15" rx="3" stroke="currentColor" stroke-width="1.8"/>
+        <path d="M4 9h16M8 3v4M16 3v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+        <path d="M9.5 14.5l1.8 1.8 3.2-3.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </span>
+    <div class="apt-info">
+      <span class="apt-status">Afspraak bevestigd</span>
+      <strong data-overview-date>—</strong>
+      <strong data-overview-moment>—</strong>
+      <span class="apt-ref">Referentienr: {config.appointment.referenceNr}</span>
+    </div>
+  </div>
+  <div class="apt-right">
+    <button type="button" class="apt-manage" data-open-manage>Beheer je afspraak</button>
+    <p class="apt-cutoff">{config.appointment.cutoffLabel}</p>
+  </div>
+</div>
+
+<style>
+  .apt-card {
+    background: var(--color-surface);
+    border-radius: var(--radius-lg);
+    padding: var(--space-md);
+    box-shadow: var(--shadow-card);
+  }
+  .apt-top {
+    display: flex;
+    gap: var(--space-sm);
+  }
+  .apt-icon {
+    flex: none;
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-card);
+    background: var(--color-action);
+    color: var(--color-ink);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .apt-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .apt-status {
+    color: var(--color-ink-subtle);
+    font-size: var(--type-body-sm-size);
+  }
+  .apt-info strong {
+    font-size: var(--type-body-size);
+  }
+  .apt-ref {
+    color: var(--color-ink-subtle);
+    font-size: var(--type-body-sm-size);
+    margin-top: var(--space-xs);
+  }
+  .apt-manage {
+    width: 100%;
+    margin-top: var(--space-md);
+    background: var(--color-ink);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius-pill);
+    padding: 14px;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: var(--type-body-size);
+  }
+  .apt-cutoff {
+    text-align: center;
+    color: var(--color-ink-subtle);
+    font-size: var(--type-body-sm-size);
+    margin-top: var(--space-sm);
+  }
+
+  /* Desktop: info left, button (with cutoff under it) on the right */
+  @media (min-width: 1024px) {
+    .apt-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-lg);
+    }
+    .apt-top {
+      flex: 1;
+    }
+    .apt-manage {
+      width: auto;
+      margin-top: 0;
+      padding: 12px 24px;
+      white-space: nowrap;
+    }
+    .apt-cutoff {
+      margin-top: var(--space-xs);
+    }
+    .apt-right {
+      flex: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+</style>

@@ -1,0 +1,63 @@
+/* Design tokens — pulled from Figma "CF – Appointment Orchestration" */
+:root {
+  /* Colour */
+  --color-canvas: #fafaf8; /* page background */
+  --color-canvas-neutral: #f0eeeb; /* greyed / unavailable surfaces */
+  --color-surface: #ffffff; /* cards */
+  --color-action: #ffc421; /* Telenet yellow accent */
+  --color-action-strong: #ffb800;
+  --color-ink: #000000; /* primary text / buttons */
+  --color-ink-subtle: rgba(20, 19, 18, 0.64); /* secondary text */
+  --color-ink-subtlest: rgba(20, 19, 18, 0.4);
+  --color-border: #91918c; /* default border */
+  --color-border-bold: rgba(20, 19, 18, 0.48);
+  --color-border-subtle: rgba(20, 19, 18, 0.08);
+
+  /* Spacing */
+  --space-2xs: 4px;
+  --space-xs: 8px;
+  --space-2sm: 10px;
+  --space-sm: 12px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+
+  /* Radius */
+  --radius-card: 8px;
+  --radius-button: 12px;
+  --radius-lg: 16px;
+  --radius-pill: 999px;
+
+  /* Typography */
+  --font-display: "Archivo", system-ui, -apple-system, sans-serif;
+  --font-body: "Hanken Grotesk", system-ui, -apple-system, sans-serif;
+
+  --type-display-2xl-size: 28px;
+  --type-display-2xl-line: 30px;
+  --type-title-xl-size: 24px;
+  --type-title-xl-line: 26px;
+  --type-title-lg-size: 20px;
+  --type-title-lg-line: 26px;
+  --type-body-size: 16px;
+  --type-body-line: 24px;
+  --type-body-sm-size: 14px;
+  --type-body-sm-line: 22px;
+  --type-caption-size: 12px;
+  --type-caption-line: 18px;
+
+  /* Layout */
+  --container-max: 1132px;
+  --mobile-width: 375px;
+  --app-pad-x: 16px;
+  /* Desktop layout (breakpoint = 1024px; media queries use the literal value) */
+  --sidebar-width: 96px;
+  --content-dashboard: 680px;
+  --content-wizard: 748px;
+  --content-confirm: 1140px;
+
+  /* Elevation */
+  --shadow-sm: 0 -4px 8px rgba(41, 29, 24, 0.08);
+  --shadow-card: 0 8px 24px rgba(41, 29, 24, 0.1);
+  --shadow-pop: 0 12px 40px rgba(41, 29, 24, 0.18);
+}

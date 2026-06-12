@@ -1,0 +1,187 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import AppShell from "../components/AppShell.astro";
+import DashboardShell from "../components/DashboardShell.astro";
+import AddressInfo from "../components/AddressInfo.astro";
+import AppointmentCard from "../components/overview/AppointmentCard.astro";
+import ActionsList from "../components/overview/ActionsList.astro";
+import GoodToKnow from "../components/overview/GoodToKnow.astro";
+import Faq from "../components/overview/Faq.astro";
+import ConfirmContent from "../components/ConfirmContent.astro";
+import EditSheets from "../components/EditSheets.astro";
+import Toast from "../components/Toast.astro";
+import { config } from "../data/variables";
+import { withBase } from "../lib/base";
+---
+
+<BaseLayout title="Je afspraak — Telenet">
+  <DashboardShell backLabel="Mijn afspraken" backHref={withBase()} bottomNav={false}>
+    <div data-overview class="ov-body">
+      <span class="ov-eyebrow">Afspraak</span>
+      <h1 class="t-title-lg">{config.appointment.overviewTitle}</h1>
+      <div class="ov-address"><AddressInfo /></div>
+
+      <AppointmentCard />
+
+      <p class="ov-contact">
+        Nog vragen over je afspraak? <a href="#">Contacteer ons</a>
+      </p>
+
+      <ActionsList />
+      <GoodToKnow />
+      <Faq />
+    </div>
+  </DashboardShell>
+
+  <!-- ── Beheer je afspraak (fullscreen overlay) ────────────────────── -->
+  <div class="manage-overlay" data-manage-overlay hidden>
+    <AppShell footer={false}>
+      <div class="wizard">
+        <header class="manage-header">
+          <button type="button" class="close" data-manage-close aria-label="Sluiten">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+            </svg>
+          </button>
+        </header>
+        <div class="pad">
+          <h1 class="t-display">Beheer je afspraak</h1>
+          <p class="t-body t-subtle manage-sub">
+            Je kan je afspraak nog tot 24 uur op voorhand wijzigen.
+          </p>
+          <ConfirmContent />
+          <div class="manage-actions">
+            <button type="button" class="btn-secondary" data-manage-close>Annuleren</button>
+            <button type="button" class="btn-primary" data-manage-save>Opslaan</button>
+          </div>
+        </div>
+      </div>
+    </AppShell>
+  </div>
+
+  <EditSheets />
+
+  <Toast message="Afspraak bevestigd" />
+</BaseLayout>
+
+<style>
+  .ov-body {
+    padding: var(--space-lg) 0 var(--space-2xl);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+  .ov-eyebrow {
+    color: var(--color-ink-subtle);
+    font-size: var(--type-body-sm-size);
+    margin-bottom: calc(-1 * var(--space-xs));
+  }
+  h1.t-title-lg {
+    margin-bottom: var(--space-2xs);
+  }
+  .ov-address {
+    margin-bottom: var(--space-xs);
+  }
+  .ov-contact {
+    text-align: center;
+    color: var(--color-ink-subtle);
+    font-size: var(--type-body-sm-size);
+    margin: var(--space-2xs) 0;
+  }
+  .ov-contact a {
+    color: var(--color-ink);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  /* Manage overlay */
+  .manage-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+  }
+  .wizard {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+  }
+  .manage-header {
+    display: flex;
+    justify-content: flex-end;
+    padding: var(--space-md) var(--app-pad-x) 0;
+  }
+  .manage-header .close {
+    width: 40px;
+    height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    color: var(--color-ink);
+    border-radius: var(--radius-pill);
+    margin-right: -8px;
+  }
+  .pad {
+    padding: var(--space-xs) var(--app-pad-x) var(--space-xl);
+  }
+  h1.t-display {
+    margin-bottom: var(--space-xs);
+  }
+  .manage-sub {
+    margin-bottom: var(--space-xs);
+  }
+  .manage-actions {
+    display: flex;
+    gap: var(--space-sm);
+    margin-top: var(--space-lg);
+  }
+  .btn-primary,
+  .btn-secondary {
+    flex: 1;
+    padding: 14px;
+    border-radius: var(--radius-pill);
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: var(--type-body-size);
+  }
+  .btn-primary {
+    background: var(--color-ink);
+    color: #fff;
+    border: 2px solid var(--color-ink);
+  }
+  .btn-secondary {
+    background: var(--color-surface);
+    color: var(--color-ink);
+    border: 2px solid var(--color-ink);
+  }
+
+  /* Desktop: center the manage content + full-width chrome */
+  @media (min-width: 1024px) {
+    .manage-header {
+      background: var(--color-surface);
+      border-bottom: 1px solid var(--color-border-subtle);
+      padding: var(--space-md) var(--space-2xl);
+    }
+    .pad {
+      max-width: var(--content-wizard);
+      margin: 0 auto;
+      padding: var(--space-2xl) var(--space-lg);
+    }
+    .manage-actions {
+      justify-content: flex-end;
+    }
+    .manage-actions .btn-primary,
+    .manage-actions .btn-secondary {
+      flex: none;
+      min-width: 160px;
+    }
+  }
+</style>
+
+<script>
+  import { initOverview } from "../scripts/overview";
+  import { initModals } from "../scripts/modal";
+  initOverview();
+  initModals();
+</script>

@@ -1,0 +1,106 @@
+---
+import { MOMENTS } from "../data/variables";
+---
+
+<div class="moments" data-moments hidden>
+  <p class="moments-help" data-moments-help></p>
+  <div class="duration" data-duration hidden></div>
+  <div class="moment-grid">
+    {
+      MOMENTS.map((m) => (
+        <button
+          type="button"
+          class="moment"
+          data-moment={m.id}
+          data-available="false"
+          disabled
+          hidden={m.id === "avond" ? false : false}
+        >
+          <span class="m-label">{m.label}</span>
+          <span class="m-range">{m.range}</span>
+        </button>
+      ))
+    }
+  </div>
+</div>
+
+<style>
+  .moments {
+    margin-top: var(--space-lg);
+    container-type: inline-size;
+  }
+  .moments-help {
+    color: var(--color-ink-subtle);
+    font-size: var(--type-body-size);
+    line-height: var(--type-body-line);
+    margin-bottom: var(--space-md);
+  }
+  .moments-help b {
+    color: var(--color-ink);
+    font-weight: 700;
+  }
+  .duration {
+    text-align: center;
+    background: var(--color-canvas-neutral);
+    border-radius: var(--radius-card);
+    padding: 12px var(--space-md);
+    font-weight: 700;
+    font-size: var(--type-body-sm-size);
+    margin-bottom: var(--space-md);
+  }
+  .moment-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-sm);
+  }
+
+  /* Wide container (desktop wizard step) → 3 columns */
+  @container (min-width: 600px) {
+    .moment-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  .moment {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    align-items: flex-start;
+    text-align: left;
+    padding: var(--space-md);
+    min-height: 84px;
+    background: var(--color-surface);
+    border: 1.5px solid var(--color-border-subtle);
+    border-radius: var(--radius-card);
+    color: var(--color-ink);
+    justify-content: center;
+  }
+  .m-label {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: var(--type-title-lg-size);
+    line-height: 1.1;
+  }
+  .m-range {
+    color: var(--color-ink-subtle);
+    font-size: var(--type-body-sm-size);
+  }
+
+  .moment[data-available="false"] {
+    background: var(--color-canvas-neutral);
+    border-color: transparent;
+    cursor: default;
+  }
+  .moment[data-available="false"] .m-label,
+  .moment[data-available="false"] .m-range {
+    color: var(--color-ink-subtlest);
+  }
+
+  .moment[data-selected="true"] {
+    background: var(--color-action);
+    border-color: var(--color-ink);
+  }
+  .moment[data-selected="true"] .m-label,
+  .moment[data-selected="true"] .m-range {
+    color: var(--color-ink);
+  }
+</style>
