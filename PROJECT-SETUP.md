@@ -145,6 +145,9 @@ export const config = {
 ```
 appointment/
 ├── astro.config.mjs
+├── wrangler.jsonc             ← Cloudflare Worker config (assets + run_worker_first)
+├── worker/
+│   └── index.js               ← Basic-Auth password gate in front of ./dist
 ├── package.json
 ├── tsconfig.json
 ├── PROJECT-SETUP.md            ← this document
@@ -252,7 +255,22 @@ type BookingState = {
 
 ---
 
-## 11. Assumptions still in effect
+## 11. Hosting & access
+
+- **Host:** Cloudflare **Workers** (static assets), deployed from GitHub via Cloudflare
+  **Workers Builds** on every push to `main`. Build `npm run build` → `dist/`, deploy
+  `npx wrangler deploy` using [`wrangler.jsonc`](./wrangler.jsonc).
+- **Served at root** (`base: '/'`); all internal URLs go through `withBase()`.
+- **Password gate:** HTTP Basic Auth in [`worker/index.js`](./worker/index.js), forced to
+  run before any asset via `run_worker_first: true`. Credentials live in encrypted Worker
+  secrets `AUTH_USER` / `AUTH_PASS` (set in the dashboard or `npx wrangler secret put`).
+- **Why not Zero Trust:** Cloudflare Access only enforces on a **custom domain**, not on a
+  free `*.workers.dev` / `*.pages.dev` URL. Swapping the Basic Auth gate for a Zero Trust
+  Access policy is a drop-in upgrade once a custom domain is attached to the Worker.
+
+---
+
+## 12. Assumptions still in effect
 - "Today" is fixed to **2026-06-11**; regenerating data updates the window.
 - First-available is **computed** from the JSON (not hardcoded to *17 juni*).
 - Copy/content stays Dutch; placeholder customer = *Isa Van den Bossche*.

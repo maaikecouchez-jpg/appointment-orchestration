@@ -1,0 +1,14 @@
+{
+  // Cloudflare Worker that serves the built Astro site (./dist) behind a
+  // Basic-Auth password gate. The Worker runs on every request first
+  // (run_worker_first) so the auth check in worker/index.js can't be bypassed.
+  // Deployed from GitHub via Cloudflare Workers Builds (`npx wrangler deploy`).
+  "name": "appointment-orchestration",
+  "compatibility_date": "2026-06-01",
+  "main": "worker/index.js",
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    "run_worker_first": true
+  }
+}

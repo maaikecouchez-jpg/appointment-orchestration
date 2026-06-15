@@ -7,18 +7,39 @@ appointment flow. See [`PROJECT-SETUP.md`](./PROJECT-SETUP.md) for the full desi
 
 ```bash
 npm install
-npm run dev        # → http://localhost:4321/appointment-orchestration/
+npm run dev        # → http://localhost:4321/
 ```
 
-> The site is configured with a `base` of `/appointment-orchestration` (for GitHub
-> Pages), so locally it lives under that path too. Internal links/assets go through
-> `withBase()` in `src/lib/base.ts`.
+> The site is served at the **root** (`base: '/'`). Internal links/assets still go
+> through `withBase()` in `src/lib/base.ts`, so changing `base` later only needs a
+> one-line edit in `astro.config.mjs`.
 
 ## Deployment
 
-Pushed to GitHub and served via **GitHub Pages** at
-`https://citizen-k-code.github.io/appointment-orchestration/`. The workflow in
-`.github/workflows/deploy.yml` rebuilds and redeploys on **every push to `main`**.
+Hosted on **Cloudflare Workers** (static assets) at
+`https://appointment-orchestration.stijn-504.workers.dev`. Cloudflare **Workers Builds**
+rebuilds and redeploys on **every push to `main`** (build `npm run build`, deploy
+`npx wrangler deploy`), driven by [`wrangler.jsonc`](./wrangler.jsonc).
+
+### Password gate
+
+The site sits behind an HTTP **Basic Auth** password wall implemented in
+[`worker/index.js`](./worker/index.js). `run_worker_first: true` in `wrangler.jsonc`
+makes that Worker run before any asset is served, so every page is gated. Credentials
+come from two **encrypted Worker secrets**:
+
+```bash
+npx wrangler secret put AUTH_USER
+npx wrangler secret put AUTH_PASS
+```
+
+(or set them in the dashboard under **Worker → Settings → Variables and Secrets**).
+The Worker **fails closed** with a 503 if those secrets are missing.
+
+> A true per-person Cloudflare Zero Trust / Access login wall is **not possible on a
+> free `*.workers.dev` (or `*.pages.dev`) URL** — Access only enforces on a custom
+> domain you control. To upgrade later: add a custom domain to the Worker, then protect
+> that hostname with a Zero Trust Access policy and drop the Basic Auth gate.
 
 ### Versions (A/B test)
 
