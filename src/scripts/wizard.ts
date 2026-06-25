@@ -42,16 +42,22 @@ export function initWizard() {
   // Mutated in place (never reassigned) so the confirm editor keeps its reference.
   const state: BookingState = loadState();
 
-  // On a hard refresh, clear the in-progress selection so the flow starts fresh
-  // (but keep a confirmed appointment so /overzicht + the booked card still work).
-  const nav = performance.getEntriesByType("navigation")[0] as
-    | PerformanceNavigationTiming
-    | undefined;
-  if (nav?.type === "reload" && sessionStorage.getItem(vKey("appointment-booked")) !== "true") {
-    state.mode = null;
-    state.date = null;
-    state.moment = null;
-    sessionStorage.setItem(vKey("booking"), JSON.stringify(state));
+  // On a hard refresh, clear the in-progress selection so the flow starts fresh.
+  // If an appointment is already booked, we keep the booking details but still
+  // clear transient confirmation state.
+  const navEntries = performance.getEntriesByType("navigation");
+  const navType = navEntries[0]?.type;
+  const legacyType = (performance as any).navigation?.type;
+  const isReload = navType === "reload" || legacyType === 1;
+
+  if (isReload) {
+    const isBooked = sessionStorage.getItem(vKey("appointment-booked")) === "true";
+    const fresh = defaultState();
+    Object.assign(state, fresh);
+    sessionStorage.removeItem(vKey("booking-confirmed"));
+    if (!isBooked) {
+      sessionStorage.removeItem(vKey("booking"));
+    }
   }
 
   const panels = new Map<PanelId, HTMLElement>();
@@ -97,17 +103,20 @@ export function initWizard() {
   });
 
   // Intro radios
-  const radios = Array.from(
-    wizardRoot.querySelectorAll<HTMLInputElement>('input[name="intro-mode"]')
-  );
-  radios.forEach((r) => {
-    r.addEventListener("change", () => {
-      if (r.checked) {
-        state.mode = r.value as BookingState["mode"];
-        persist();
-        refreshFooter();
-      }
-    });
+  const dateCard = wizardRoot.querySelector<HTMLElement>('[data-select-date]')!;
+  dateCard.addEventListener("click", (event) => {
+    const target = event.target as HTMLElement;
+    if (target.closest('button')) return;
+    state.mode = "custom";
+    persist();
+    refreshFooter();
+    show("date");
+  });
+  dateCard.querySelector<HTMLButtonElement>('.date-card__action')?.addEventListener("click", () => {
+    state.mode = "custom";
+    persist();
+    refreshFooter();
+    show("date");
   });
 
   // ── Confirm cards + edit bottom sheets (shared) ───────────────────

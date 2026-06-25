@@ -28,9 +28,6 @@ export const config = {
   notice:
     "1 dag op voorhand sturen we je een bericht met een concreet tijdstip wanneer onze technieker langskomt.",
 
-  /** Window (used as a fallback label; the real "today" comes from the data). */
-  firstAvailableWindowLabel: "Tussen 8u – 17u",
-
   /** "Mijn afspraken" landing page. */
   landing: {
     title: "Mijn afspraken",
@@ -80,6 +77,12 @@ export const config = {
   infoModal: {
     title: "Outdoor fiber installatie",
     body: "Onze technieker zorgt ervoor dat je woning op het fiber netwerk aangesloten wordt. Hij brengt de glasvezelkabel tot in je woning — een boring in je gevel is mogelijk. Daarna controleert hij je aansluiting grondig zodat alles correct werkt.",
+  },
+
+  /** Loading durations for simulated date retrieval. */
+  loading: {
+    datePickerMs: 8000,
+    calendarMs: 16000,
   },
 } as const;
 

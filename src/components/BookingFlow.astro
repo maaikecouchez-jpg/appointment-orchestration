@@ -12,7 +12,6 @@ import StepNav from "./StepNav.astro";
 import Modal from "./Modal.astro";
 import Toast from "./Toast.astro";
 import { config } from "../data/variables";
-import { firstAvailable, longDate } from "../lib/availability";
 import { withBase } from "../lib/base";
 
 interface Props {
@@ -20,9 +19,6 @@ interface Props {
 }
 const { version = "1" } = Astro.props;
 const detailHref = withBase(`v${version}/overzicht`);
-
-const fa = firstAvailable();
-const faLabel = fa ? longDate(fa.day.date) : "Geen datum beschikbaar";
 ---
 
 <Fragment>
@@ -83,6 +79,7 @@ const faLabel = fa ? longDate(fa.day.date) : "Geen datum beschikbaar";
   </DashboardShell>
 
   <!-- ── Wizard fullscreen overlay ──────────────────────────────────── -->
+  <div class="global-loading-backdrop" data-global-backdrop hidden></div>
   <div class="wizard-overlay" data-wizard-overlay hidden>
     <AppShell>
       <div class="wizard" data-wizard>
@@ -95,8 +92,20 @@ const faLabel = fa ? longDate(fa.day.date) : "Geen datum beschikbaar";
             <p class="t-body t-subtle intro-sub">{config.service.subtitle}</p>
             <div class="intro-address"><AddressInfo /></div>
             <div class="intro-cards">
-              <RadioCard value="first-available" badge="Eerst beschikbaar" title={faLabel} subtitle={config.firstAvailableWindowLabel} />
-              <RadioCard value="custom" title="Op een ander moment" subtitle="Kies zelf je dag en moment" />
+              <div class="date-card" data-select-date>
+                <div class="date-card__content">
+                  <span class="title">Installatieafspraak</span>
+                  <span class="cta">Kies je datum en moment</span>
+                </div>
+                <button type="button" class="btn btn--next date-card__action" aria-label="Kies je datum en moment">
+                  <span>Kies</span>
+                  <span class="ico ico--chip">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                      <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                  </span>
+                </button>
+              </div>
             </div>
             <section class="whatwedo">
               <h2 class="t-caption section-head">Wat gaan we doen</h2>
@@ -267,6 +276,85 @@ const faLabel = fa ? longDate(fa.day.date) : "Geen datum beschikbaar";
       width: auto;
       flex: none;
       padding: 12px 24px;
+    }
+  }
+
+  .date-card {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-md);
+    border: 1px solid rgba(0, 0, 0, 0.14);
+    border-radius: 24px;
+    background: var(--color-action);
+    color: var(--color-ink);
+    padding: 18px 20px;
+    cursor: pointer;
+    transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+  .date-card:hover {
+    transform: translateY(-1px);
+    border-color: rgba(0, 0, 0, 0.2);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.06);
+  }
+  .date-card__content {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .date-card .title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.1rem;
+    line-height: 1.15;
+  }
+  .date-card .cta {
+    color: rgba(20, 19, 18, 0.78);
+    font-size: var(--type-body-size);
+  }
+  .date-card__action {
+    flex: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px 18px;
+    background: var(--color-ink);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius-button);
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: var(--type-body-size);
+    line-height: 1;
+    text-transform: none;
+    min-width: 88px;
+  }
+  .date-card__action .ico {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    border-radius: 7px;
+    background: var(--color-action);
+    color: var(--color-ink);
+  }
+
+  @media (max-width: 1023px) {
+    .date-card {
+      padding: 16px 16px;
+      border-radius: 20px;
+      gap: var(--space-sm);
+    }
+    .date-card .title {
+      font-size: 1rem;
+    }
+    .date-card__action {
+      padding: 9px 14px;
+      min-width: 76px;
     }
   }
 
@@ -493,12 +581,37 @@ const faLabel = fa ? longDate(fa.day.date) : "Geen datum beschikbaar";
       display: none;
     }
   }
+
+  /* Global loading backdrop shown behind the wizard but above the page */
+  .global-loading-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 59; /* behind wizard (60) but above page */
+    background: rgba(217, 217, 217, 0.5);
+    display: none;
+    pointer-events: auto;
+  }
+  .global-loading-backdrop[data-visible="true"] {
+    display: block;
+  }
+  .global-loading-backdrop:not([hidden]) {
+    display: block;
+  }
 </style>
 
 <script>
   import { initWizard } from "../scripts/wizard";
   import { initModals } from "../scripts/modal";
   import { initLanding } from "../scripts/landing";
+  import { config } from "../data/variables";
+
+  window.__ASTRO_APP_CONFIG = {
+    loading: {
+      datePickerMs: config.loading.datePickerMs,
+      calendarMs: config.loading.calendarMs,
+    },
+  };
+
   initLanding();
   initWizard();
   initModals();

@@ -51,6 +51,13 @@ const months = monthKeys.map((key) => {
     </button>
   </div>
 
+  <div class="loading-state" data-loading-state hidden>
+    <span class="loading-pill">
+      <span class="spinner" aria-hidden="true"></span>
+      <span>Even geduld</span>
+    </span>
+  </div>
+
   <div class="cal-weekdays">
     {WEEKDAYS.map((w) => <span>{w}</span>)}
   </div>
@@ -116,6 +123,50 @@ const months = monthKeys.map((key) => {
   }
   .cal-nav:not([disabled]):hover {
     background: var(--color-canvas-neutral);
+  }
+
+  .loading-state {
+    display: flex;
+    justify-content: center;
+    margin-bottom: var(--space-md);
+  }
+  .loading-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 18px;
+    border-radius: 999px;
+    background: var(--color-surface);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+    color: var(--color-ink);
+    font-weight: 700;
+    font-size: var(--type-body-size);
+  }
+  .loading-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: auto;
+  }
+  .loading-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(217, 217, 217, 0.5);
+  }
+  .spinner {
+    width: 18px;
+    height: 18px;
+    border: 2px solid rgba(0, 0, 0, 0.12);
+    border-top-color: var(--color-ink);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+  @keyframes spin {
+    to { transform: rotate(360deg); }
   }
 
   .cal-weekdays {

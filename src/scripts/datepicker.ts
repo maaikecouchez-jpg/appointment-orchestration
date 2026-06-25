@@ -18,6 +18,7 @@ export function initDatePicker(
   const cells = Array.from(grid.querySelectorAll<HTMLButtonElement>("[data-cell]"));
   const prevBtn = root.querySelector<HTMLButtonElement>("[data-prev]")!;
   const nextBtn = root.querySelector<HTMLButtonElement>("[data-next-page]")!;
+  const loadingOverlay = root.querySelector<HTMLElement>("[data-loading-overlay]")!;
 
   let start = 0;
   let selected: string | null = null;
@@ -58,13 +59,32 @@ export function initDatePicker(
     });
   });
 
+  function setLoading(isLoading: boolean) {
+    loadingOverlay.hidden = !isLoading;
+    const globalBackdrop = document.querySelector<HTMLElement>('[data-global-backdrop]');
+    if (globalBackdrop) globalBackdrop.hidden = !isLoading;
+    grid.hidden = isLoading;
+    prevBtn.disabled = isLoading || start === 0;
+    nextBtn.disabled = isLoading || start + page >= cells.length;
+  }
+
   prevBtn.addEventListener("click", () => {
-    start = Math.max(0, start - page);
-    renderWindow();
+    if (start === 0) return;
+    setLoading(true);
+    setTimeout(() => {
+      start = Math.max(0, start - page);
+      renderWindow();
+      setLoading(false);
+    }, window.__ASTRO_APP_CONFIG?.loading?.datePickerMs ?? 8000);
   });
   nextBtn.addEventListener("click", () => {
-    if (start + page < cells.length) start += page;
-    renderWindow();
+    if (start + page >= cells.length) return;
+    setLoading(true);
+    setTimeout(() => {
+      start += page;
+      renderWindow();
+      setLoading(false);
+    }, window.__ASTRO_APP_CONFIG?.loading?.datePickerMs ?? 8000);
   });
 
   renderWindow();
